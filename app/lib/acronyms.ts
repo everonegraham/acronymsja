@@ -22,7 +22,7 @@ export const CATEGORY_ORDER = [
   "Health",
   "Security & Justice",
   "Infrastructure",
-  "Culture & Sports",
+  "Culture, Sports & Entertainment",
   "Technology",
   "Other",
 ];
