@@ -27,13 +27,17 @@ body:
     id: category
     attributes:
       label: Category
-      description: Which group does this entity belong to?
+      description: Which sector does this acronym belong to?
       options:
-        - Ministries & Offices
-        - Finance & Trade
+        - Government & Public Sector
+        - Business & Finance
+        - Education
+        - Health
         - Security & Justice
-        - Infrastructure & Utilities
-        - Education & Social Services
+        - Infrastructure
+        - Culture & Sports
+        - Technology
+        - Other
     validations:
       required: true
   - type: textarea

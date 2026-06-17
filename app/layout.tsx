@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
+import { siteConfig } from "./lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -19,9 +20,53 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jamaica Gov Acronyms — Administrative & Regulatory Registry",
-  description:
-    "An ultra-sleek offline-compatible registry and interactive study hub of Jamaica Government acronyms, ministries, public trusts, and regulatory authorities.",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.title,
+    template: `%s · ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  keywords: [
+    "Jamaican acronyms",
+    "Jamaica acronyms",
+    "Jamaican abbreviations",
+    "Jamaica acronym directory",
+    "what does it stand for Jamaica",
+    "JA acronyms",
+    "Jamaica government acronyms",
+    "Acronyms JA",
+  ],
+  authors: [{ name: siteConfig.name }],
+  creator: siteConfig.name,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_JM",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: siteConfig.title,
+    description: siteConfig.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.title,
+    description: siteConfig.description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  category: "reference",
 };
 
 export default function RootLayout({
@@ -31,7 +76,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="en-JM"
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">

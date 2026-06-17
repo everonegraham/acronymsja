@@ -272,7 +272,7 @@ export default function AcronymsApp() {
           {/* Quick counters & Registry indicators */}
           <div className="flex items-center justify-between border-b border-slate-200 pb-3">
             <p className="text-xs text-slate-500">
-              Showing <strong className="text-slate-700">{filteredAndSortedAcronyms.length}</strong> matching agencies
+              Showing <strong className="text-slate-700">{filteredAndSortedAcronyms.length}</strong> matching acronyms
               {selectedCategory !== "All Categories" && ` in "${selectedCategory}"`}
             </p>
 
@@ -410,7 +410,7 @@ export default function AcronymsApp() {
                 About Acronyms JA
               </h2>
               <p className="text-slate-500 font-light leading-relaxed text-sm max-w-xl mx-auto">
-                Acronyms JA is a simple tool to help everyone figure out what Jamaican government acronyms stand for. No more guessing.
+                Acronyms JA is a simple tool to help everyone figure out what Jamaican acronyms stand for. No more guessing.
               </p>
             </div>
 
@@ -422,7 +422,7 @@ export default function AcronymsApp() {
                 </div>
                 <h3 className="text-sm font-bold text-slate-800">1. Making it Clear</h3>
                 <p className="text-xs text-slate-500 font-light leading-relaxed">
-                  Jamaica's public sector has a lot of different agencies, ministries, and boards. We put together this directory so you can easily lookup those confusing initials and abbreviations.
+                  Jamaica is full of acronyms — across government, business, education, and everyday life. We put together this directory so you can easily look up those confusing initials and abbreviations.
                 </p>
               </div>
 
@@ -442,7 +442,7 @@ export default function AcronymsApp() {
               <div className="space-y-2">
                 <h4 className="text-xs font-mono font-extrabold text-[#2a4d69] uppercase tracking-wider">Categories</h4>
                 <p className="text-xs text-slate-500 font-light max-w-2xl leading-normal">
-                  We've organized the different government entities into the following categories to make them easier to browse:
+                  We've organized entries into the following categories to make them easier to browse:
                 </p>
               </div>
 
@@ -455,7 +455,7 @@ export default function AcronymsApp() {
                     <div>
                       <span className="block text-xs font-bold text-slate-800">{cat}</span>
                       <span className="block text-[11px] text-slate-500 font-light mt-0.5">
-                        Agencies and organizations related to {cat.toLowerCase()}.
+                        Acronyms related to {cat.toLowerCase()}.
                       </span>
                     </div>
                   </div>
