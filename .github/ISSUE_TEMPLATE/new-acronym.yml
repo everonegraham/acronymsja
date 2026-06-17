@@ -1,0 +1,62 @@
+name: Propose a new acronym
+description: Suggest a Jamaican government acronym to add to the registry.
+title: "[Acronym]: "
+labels: ["new-acronym"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping grow the registry! Fill in what you can — the more detail, the faster it can be reviewed and added.
+  - type: input
+    id: acronym
+    attributes:
+      label: Acronym
+      description: The abbreviation itself.
+      placeholder: e.g. NHT
+    validations:
+      required: true
+  - type: input
+    id: fullName
+    attributes:
+      label: Full name
+      description: What the acronym stands for.
+      placeholder: e.g. National Housing Trust
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Which group does this entity belong to?
+      options:
+        - Ministries & Offices
+        - Finance & Trade
+        - Security & Justice
+        - Infrastructure & Utilities
+        - Education & Social Services
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A short summary of what the organization does.
+      placeholder: e.g. A statutory body that provides housing finance and develops housing solutions for contributors.
+    validations:
+      required: true
+  - type: input
+    id: established
+    attributes:
+      label: Established year
+      description: The year it was founded (if known).
+      placeholder: e.g. 1976
+    validations:
+      required: false
+  - type: input
+    id: source
+    attributes:
+      label: Source / reference
+      description: A link to an official page or document that verifies these details (optional but appreciated).
+      placeholder: https://...
+    validations:
+      required: false

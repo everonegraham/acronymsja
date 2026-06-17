@@ -63,7 +63,7 @@ export default function Header({ currentTab, onTabChange }: HeaderProps) {
 
           {/* Form Trigger Button */}
           <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSfD_mockFormUrlForJamaicaAcronyms/viewform?usp=sf_link"
+            href="https://github.com/everonegraham/acronymsja/issues/new?template=new-acronym.yml"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg bg-[#2a4d69] hover:bg-[#1e3d59] duration-150 transition-all text-white font-bold text-[10.5px] sm:text-[11px] px-3.5 py-1.5 flex items-center gap-1.5 shadow-xs whitespace-nowrap"

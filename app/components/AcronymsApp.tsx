@@ -472,7 +472,7 @@ export default function AcronymsApp() {
                 Browse List
               </button>
               <a
-                href="https://docs.google.com/forms/d/e/1FAIpQLSfD_mockFormUrlForJamaicaAcronyms/viewform?usp=sf_link"
+                href="https://github.com/everonegraham/acronymsja/issues/new?template=new-acronym.yml"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto rounded-lg border border-slate-200 hover:border-[#adc2d2]/60 hover:bg-slate-50 text-slate-650 font-bold text-xs px-6 py-2.5 transition duration-150 text-center"
