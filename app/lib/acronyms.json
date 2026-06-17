@@ -404,5 +404,13 @@
     "description": "Protects and registers intellectual property rights. Administers laws surrounding copyright works, design patents, industrial designs, manufacturing marks, and traditional geographical indications.",
     "category": "Education & Social Services",
     "established": "2001"
+  },
+  {
+    "id": "roofs",
+    "acronym": "ROOFS",
+    "fullName": "Restoration of Owner or Occupant Family Shelters",
+    "description": "The ROOFS programme provides financial assistance to rebuild homes that were damaged by hurricane Melissa and assessed through the Ministry of Labour and Social Security.",
+    "category": "Education & Social Services",
+    "established": "2026"
   }
 ]
