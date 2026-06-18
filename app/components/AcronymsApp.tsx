@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
-import { acronymsData as defaultAcronyms, Acronym, CATEGORIES } from "../lib/acronyms";
+import React, { useState, useEffect, useMemo, useRef } from "react";
+import { acronymsData as defaultAcronyms, CATEGORIES } from "../lib/acronyms";
+import { siteConfig } from "../lib/site";
 import Header from "./Header";
 import {
   Search,
@@ -22,15 +23,15 @@ import {
 } from "lucide-react";
 
 export default function AcronymsApp() {
-  // Acronym state (initialized with default data + custom ones from localStorage)
-  const [acronyms, setAcronyms] = useState<Acronym[]>([]);
+  // Static directory data — available at build time so it renders on the server.
+  const acronyms = defaultAcronyms;
   const [selectedCategory, setSelectedCategory] = useState<string>("All Categories");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortBy, setSortBy] = useState<string>("acronym-asc");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   // Selected detail state
-  const [selectedId, setSelectedId] = useState<string>("");
+  const [selectedId, setSelectedId] = useState<string>(defaultAcronyms[0]?.id ?? "");
 
   // Notification tooltip states (maps acronymId -> boolean when copied)
   const [copiedStates, setCopiedStates] = useState<Record<string, boolean>>({});
@@ -43,42 +44,32 @@ export default function AcronymsApp() {
 
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
-  // Initialize and load saved state from localStorage
+  // Ref to the dialog container so focus can move into it when the modal opens.
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // Deep link: open the modal for ?id=<acronym id> on first load. This runs only
+  // on the client after hydration — the static prerender has no query string —
+  // so setting state here is correct despite the set-state-in-effect rule.
   useEffect(() => {
-    // 1. Fetch custom acronyms from localStorage
-    const savedCustom = localStorage.getItem("jamaica_gov_custom_acronyms");
-    let initialList = [...defaultAcronyms];
-    if (savedCustom) {
-      try {
-        const parsedCustom = JSON.parse(savedCustom) as Acronym[];
-        // Filter out any duplicates just in case
-        const customFiltered = parsedCustom.filter(
-          c => !defaultAcronyms.some(da => da.id === c.id || da.acronym === c.acronym)
-        );
-        initialList = [...initialList, ...customFiltered];
-      } catch (e) {
-        console.error("Failed to parse custom acronyms", e);
-      }
-    }
-    setAcronyms(initialList);
-
-    // Deep linking check
-    const searchParams = new URLSearchParams(window.location.search);
-    const idParam = searchParams.get("id");
-
-    if (idParam) {
-      const foundAcronym = initialList.find(a => a.id === idParam);
-      if (foundAcronym) {
-        setSelectedId(foundAcronym.id);
-        setIsModalOpen(true);
-      } else if (initialList.length > 0) {
-        setSelectedId(initialList[0].id);
-      }
-    } else if (initialList.length > 0) {
-      // Set default selected acronym to the first one
-      setSelectedId(initialList[0].id);
+    const idParam = new URLSearchParams(window.location.search).get("id");
+    if (idParam && defaultAcronyms.some((a) => a.id === idParam)) {
+      /* eslint-disable react-hooks/set-state-in-effect */
+      setSelectedId(idParam);
+      setIsModalOpen(true);
+      /* eslint-enable react-hooks/set-state-in-effect */
     }
   }, []);
+
+  // Modal keyboard behavior: Escape closes; focus moves into the dialog on open.
+  useEffect(() => {
+    if (!isModalOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsModalOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    modalRef.current?.focus();
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [isModalOpen]);
 
   // Copy text to clipboard indicator helper
   const handleCopyText = (id: string, text: string, e: React.MouseEvent, toastMsg?: string) => {
@@ -149,8 +140,6 @@ export default function AcronymsApp() {
 
       {/* Prime Header Component */}
       <Header
-        totalCount={acronyms.length}
-        activeCategory={selectedCategory}
         currentTab={currentTab}
         onTabChange={setCurrentTab}
       />
@@ -167,7 +156,7 @@ export default function AcronymsApp() {
 
               {/* Sleek Search Frame */}
               <div className="relative flex-1">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-450">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
                   <Search className="h-4.5 w-4.5" />
                 </div>
                 <input
@@ -181,7 +170,7 @@ export default function AcronymsApp() {
                 {searchTerm && (
                   <button
                     onClick={() => setSearchTerm("")}
-                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-650"
+                    className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600"
                     id="clear-search-btn"
                   >
                     <X className="h-4 w-4" />
@@ -295,7 +284,7 @@ export default function AcronymsApp() {
               <AlertCircle className="mx-auto h-12 w-12 text-slate-400" />
               <h3 className="mt-4 text-base font-bold text-slate-800">No Acronyms Found</h3>
               <p className="mt-2 text-xs text-slate-500 max-w-md mx-auto">
-                We couldn't find any results matching your filters. Try entering a different keyword,
+                We couldn&apos;t find any results matching your filters. Try entering a different keyword,
                 adding a custom acronym, or clearing active category guidelines.
               </p>
               <button
@@ -325,8 +314,17 @@ export default function AcronymsApp() {
                 return (
                   <div
                     key={item.id}
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`View details for ${item.acronym} — ${item.fullName}`}
                     onClick={() => handleSelectCard(item.id)}
-                    className={`relative flex flex-col justify-between p-5 rounded-xl border transition-all cursor-pointer ${
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        handleSelectCard(item.id);
+                      }
+                    }}
+                    className={`relative flex flex-col justify-between p-5 rounded-xl border transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2a4d69]/40 ${
                       isSelected
                         ? "bg-[#f0f4f8] border-[#adc2d2] ring-2 ring-[#2a4d69]/10 shadow-xs"
                         : "bg-white border-[#e0e0e0] hover:border-[#adc2d2] hover:shadow-xs"
@@ -356,7 +354,7 @@ export default function AcronymsApp() {
                               shareObj.searchParams.set("id", item.id);
                               handleCopyText(item.id, shareObj.toString(), e, "Link copied to clipboard");
                             }}
-                            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-50 hover:text-slate-605 transition"
+                            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-50 hover:text-slate-600 transition"
                             title="Copy link"
                             id={`copy-btn-${item.id}`}
                           >
@@ -416,7 +414,7 @@ export default function AcronymsApp() {
 
             {/* Grid Block: Three main columns */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-              <div className="rounded-xl border border-slate-200 bg-white p-6 space-y-3 shadow-3xs hover:border-[#adc2d2]/65 transition-all">
+              <div className="rounded-xl border border-slate-200 bg-white p-6 space-y-3 shadow-2xs hover:border-[#adc2d2]/65 transition-all">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#2a4d69]/10 text-[#2a4d69]">
                   <BookOpen className="h-5 w-5" />
                 </div>
@@ -426,7 +424,7 @@ export default function AcronymsApp() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-slate-200 bg-white p-6 space-y-3 shadow-3xs hover:border-[#adc2d2]/65 transition-all">
+              <div className="rounded-xl border border-slate-200 bg-white p-6 space-y-3 shadow-2xs hover:border-[#adc2d2]/65 transition-all">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#2a4d69]/10 text-[#2a4d69]">
                   <HelpCircle className="h-5 w-5" />
                 </div>
@@ -442,7 +440,7 @@ export default function AcronymsApp() {
               <div className="space-y-2">
                 <h4 className="text-xs font-mono font-extrabold text-[#2a4d69] uppercase tracking-wider">Categories</h4>
                 <p className="text-xs text-slate-500 font-light max-w-2xl leading-normal">
-                  We've organized entries into the following categories to make them easier to browse:
+                  We&apos;ve organized entries into the following categories to make them easier to browse:
                 </p>
               </div>
 
@@ -472,10 +470,10 @@ export default function AcronymsApp() {
                 Browse List
               </button>
               <a
-                href="https://github.com/everonegraham/acronymsja/issues/new?template=new-acronym.yml"
+                href={siteConfig.proposeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto rounded-lg border border-slate-200 hover:border-[#adc2d2]/60 hover:bg-slate-50 text-slate-650 font-bold text-xs px-6 py-2.5 transition duration-150 text-center"
+                className="w-full sm:w-auto rounded-lg border border-slate-200 hover:border-[#adc2d2]/60 hover:bg-slate-50 text-slate-600 font-bold text-xs px-6 py-2.5 transition duration-150 text-center"
               >
                 Propose
               </a>
@@ -500,7 +498,12 @@ export default function AcronymsApp() {
           onClick={() => setIsModalOpen(false)}
         >
           <div
-            className="relative w-full max-w-xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-scale-up border border-[#adc2d2]/45"
+            ref={modalRef}
+            tabIndex={-1}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="profile-modal-title"
+            className="relative w-full max-w-xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col animate-scale-up border border-[#adc2d2]/45 focus:outline-none"
             id="profile-modal-content"
             onClick={(e) => e.stopPropagation()}
           >
@@ -523,7 +526,10 @@ export default function AcronymsApp() {
             <div className="p-6 md:p-8 flex flex-col gap-6 overflow-y-auto max-h-[70vh]">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h2 className="text-4xl font-black font-display tracking-tight text-[#1a1a1a]">
+                  <h2
+                    id="profile-modal-title"
+                    className="text-4xl font-black font-display tracking-tight text-[#1a1a1a]"
+                  >
                     {currentSelectedAcronym.acronym}
                   </h2>
                   <h3 className="mt-2 text-sm font-bold text-slate-700 leading-relaxed font-sans">

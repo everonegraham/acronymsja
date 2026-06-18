@@ -33,7 +33,6 @@ export default function Image() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "26px" }}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={logo} width={104} height={104} alt="" />
           <div
             style={{

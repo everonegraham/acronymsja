@@ -1,10 +1,9 @@
 "use client";
 
 import { PlusCircle, Library } from "lucide-react";
+import { siteConfig } from "../lib/site";
 
 interface HeaderProps {
-  totalCount: number;
-  activeCategory: string;
   currentTab: "listing" | "about";
   onTabChange: (tab: "listing" | "about") => void;
 }
@@ -63,15 +62,15 @@ export default function Header({ currentTab, onTabChange }: HeaderProps) {
 
           {/* Form Trigger Button */}
           <a
-            href="https://github.com/everonegraham/acronymsja/issues/new?template=new-acronym.yml"
+            href={siteConfig.proposeUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg bg-[#2a4d69] hover:bg-[#1e3d59] duration-150 transition-all text-white font-bold text-[10.5px] sm:text-[11px] px-3.5 py-1.5 flex items-center gap-1.5 shadow-xs whitespace-nowrap"
             id="propose-acronym-google-form-btn"
           >
             <PlusCircle className="h-3.5 w-3.5" />
-            <span className="hidden xs:inline">Propose Acronym</span>
-            <span className="inline xs:hidden">Propose</span>
+            <span className="hidden sm:inline">Propose Acronym</span>
+            <span className="inline sm:hidden">Propose</span>
           </a>
         </div>
         </div>
