@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { acronymsData as defaultAcronyms } from "../lib/acronyms";
 import { siteConfig } from "../lib/site";
 import Header from "./Header";
@@ -111,16 +111,45 @@ export default function AcronymsApp() {
     }
   }, []);
 
+  // Close the modal and drop ?id= from the URL. If we pushed a history entry when
+  // opening (the common case), pop it with back() so the popstate handler does the
+  // closing and the entry doesn't linger. If the user instead deep-linked straight
+  // to ?id=, there's nothing to pop, so just rewrite the URL in place.
+  const closeModal = useCallback(() => {
+    if (window.history.state?.acronymModal) {
+      window.history.back();
+    } else {
+      window.history.replaceState({}, "", window.location.pathname);
+      setIsModalOpen(false);
+    }
+  }, []);
+
+  // Keep modal state in sync with browser navigation: Back/Forward (and our own
+  // back() above) land here, where the URL's ?id= is the single source of truth.
+  useEffect(() => {
+    const onPopState = () => {
+      const idParam = new URLSearchParams(window.location.search).get("id");
+      if (idParam && defaultAcronyms.some((a) => a.id === idParam)) {
+        setSelectedId(idParam);
+        setIsModalOpen(true);
+      } else {
+        setIsModalOpen(false);
+      }
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
   // Modal keyboard behavior: Escape closes; focus moves into the dialog on open.
   useEffect(() => {
     if (!isModalOpen) return;
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsModalOpen(false);
+      if (e.key === "Escape") closeModal();
     };
     document.addEventListener("keydown", onKeyDown);
     modalRef.current?.focus();
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [isModalOpen]);
+  }, [isModalOpen, closeModal]);
 
   // Copy text to clipboard indicator helper
   const handleCopyText = (id: string, text: string, e: React.MouseEvent, toastMsg?: string) => {
@@ -202,6 +231,9 @@ export default function AcronymsApp() {
   const handleSelectCard = (id: string) => {
     setSelectedId(id);
     setIsModalOpen(true);
+    // Push a history entry tagged so closeModal/Back knows it can pop it. This
+    // makes the modal shareable (URL carries ?id=) and Back-button dismissable.
+    window.history.pushState({ acronymModal: true }, "", `${window.location.pathname}?id=${id}`);
   };
 
   return (
@@ -533,7 +565,7 @@ export default function AcronymsApp() {
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-fade-in"
           id="profile-detail-modal"
-          onClick={() => setIsModalOpen(false)}
+          onClick={() => closeModal()}
         >
           <div
             ref={modalRef}
@@ -576,7 +608,7 @@ export default function AcronymsApp() {
                     )}
                   </button>
                   <button
-                    onClick={() => setIsModalOpen(false)}
+                    onClick={() => closeModal()}
                     className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
                     id="close-modal-x-btn"
                     aria-label="Close"
@@ -608,7 +640,7 @@ export default function AcronymsApp() {
             {/* Modal Bottom Actions Footer */}
             <div className="bg-slate-50 border-t border-slate-100 px-6 py-4 flex items-center justify-end shrink-0">
               <button
-                onClick={() => setIsModalOpen(false)}
+                onClick={() => closeModal()}
                 className="rounded-lg bg-[#2a4d69] px-6 py-2 text-xs font-bold text-white hover:bg-[#1d354b] transition-all focus:outline-none"
                 id="modal-close-action-btn"
               >
