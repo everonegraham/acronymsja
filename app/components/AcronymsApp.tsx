@@ -21,6 +21,25 @@ import {
   ChevronDown,
 } from "lucide-react";
 
+// Wrap every case-insensitive occurrence of `query` inside `text` in a <mark> so
+// search hits are visually highlighted. Regex specials in the query are escaped
+// so a user typing "(" or "." can't break the matcher.
+function highlightMatch(text: string, query: string): React.ReactNode {
+  const q = query.trim();
+  if (!q) return text;
+  const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const parts = text.split(new RegExp(`(${escaped})`, "gi"));
+  return parts.map((part, i) =>
+    part.toLowerCase() === q.toLowerCase() ? (
+      <mark key={i} className="rounded-sm bg-[#fdf0a8] text-inherit">
+        {part}
+      </mark>
+    ) : (
+      <React.Fragment key={i}>{part}</React.Fragment>
+    ),
+  );
+}
+
 export default function AcronymsApp() {
   // Static directory data — available at build time so it renders on the server.
   const acronyms = defaultAcronyms;
@@ -44,6 +63,40 @@ export default function AcronymsApp() {
 
   // Ref to the dialog container so focus can move into it when the modal opens.
   const modalRef = useRef<HTMLDivElement>(null);
+
+  // Refs for keyboard-driven navigation: "/" jumps to search, arrow keys move
+  // between the rendered cards inside the grid container.
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  // Move keyboard focus to the card at `index` (clamped to the rendered range).
+  const focusCard = (index: number) => {
+    const cards = gridRef.current?.querySelectorAll<HTMLElement>("[data-card-index]");
+    if (!cards || cards.length === 0) return;
+    const clamped = Math.max(0, Math.min(index, cards.length - 1));
+    cards[clamped]?.focus();
+  };
+
+  // Global "/" shortcut focuses the search box — unless the user is already
+  // typing in a field or the modal is open.
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (isModalOpen) return;
+      const target = e.target as HTMLElement;
+      if (
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.isContentEditable
+      ) {
+        return;
+      }
+      e.preventDefault();
+      searchInputRef.current?.focus();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [isModalOpen]);
 
   // Deep link: open the modal for ?id=<acronym id> on first load. This runs only
   // on the client after hydration — the static prerender has no query string —
@@ -90,11 +143,11 @@ export default function AcronymsApp() {
 
   // Search & Filter & Sort Pipeline
   const filteredAndSortedAcronyms = useMemo(() => {
+    const query = searchTerm.toLowerCase().trim();
     let result = [...acronyms];
 
     // Filter by text search (acronym, name, or description matches)
-    if (searchTerm.trim() !== "") {
-      const query = searchTerm.toLowerCase().trim();
+    if (query !== "") {
       result = result.filter(
         a =>
           a.acronym.toLowerCase().includes(query) ||
@@ -103,8 +156,19 @@ export default function AcronymsApp() {
       );
     }
 
-    // Sort order logic
-    result.sort((a, b) => {
+    // Relevance tier: where the query was found, lower is stronger. Used as the
+    // primary sort key while searching so an acronym hit beats a description hit.
+    const relevance = (a: (typeof acronyms)[number]) => {
+      const ac = a.acronym.toLowerCase();
+      if (ac === query) return 0;
+      if (ac.startsWith(query)) return 1;
+      if (ac.includes(query)) return 2;
+      if (a.fullName.toLowerCase().includes(query)) return 3;
+      return 4; // matched on description only
+    };
+
+    // The user's chosen sort — also the tie-breaker within a relevance tier.
+    const bySort = (a: (typeof acronyms)[number], b: (typeof acronyms)[number]) => {
       switch (sortBy) {
         case "acronym-asc":
           return a.acronym.localeCompare(b.acronym);
@@ -121,6 +185,15 @@ export default function AcronymsApp() {
         default:
           return 1;
       }
+    };
+
+    result.sort((a, b) => {
+      // While searching, strongest matches surface first; the chosen sort breaks ties.
+      if (query !== "") {
+        const tier = relevance(a) - relevance(b);
+        if (tier !== 0) return tier;
+      }
+      return bySort(a, b);
     });
 
     return result;
@@ -156,14 +229,21 @@ export default function AcronymsApp() {
                   <Search className="h-4.5 w-4.5" />
                 </div>
                 <input
+                  ref={searchInputRef}
                   type="text"
                   className="w-full pl-10 pr-10 py-3 text-xs bg-[#fdfdfd] rounded-lg border border-[#e0e0e0] text-[#1a1a1a] placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-[#adc2d2]/30 focus:border-[#2a4d69] focus:outline-none transition-all"
                   placeholder="Query acronyms (e.g. NHT, HEART), full expanded names, or description keywords..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "ArrowDown") {
+                      e.preventDefault();
+                      focusCard(0);
+                    }
+                  }}
                   id="acronym-search-input"
                 />
-                {searchTerm && (
+                {searchTerm ? (
                   <button
                     onClick={() => setSearchTerm("")}
                     className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600"
@@ -171,6 +251,10 @@ export default function AcronymsApp() {
                   >
                     <X className="h-4 w-4" />
                   </button>
+                ) : (
+                  <kbd className="pointer-events-none absolute inset-y-0 right-3 my-auto hidden h-5 items-center rounded border border-[#e0e0e0] bg-white px-1.5 font-mono text-[10px] font-semibold text-slate-400 sm:flex">
+                    /
+                  </kbd>
                 )}
               </div>
 
@@ -266,6 +350,7 @@ export default function AcronymsApp() {
             </div>
           ) : (
             <div
+              ref={gridRef}
               className={
                 viewMode === "grid"
                   ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
@@ -273,7 +358,7 @@ export default function AcronymsApp() {
               }
               id="acronyms-items-container"
             >
-               {filteredAndSortedAcronyms.map((item) => {
+               {filteredAndSortedAcronyms.map((item, idx) => {
                 const isSelected = item.id === selectedId;
                 const isCopied = copiedStates[item.id] || false;
 
@@ -282,12 +367,20 @@ export default function AcronymsApp() {
                     key={item.id}
                     role="button"
                     tabIndex={0}
+                    data-card-index={idx}
                     aria-label={`View details for ${item.acronym} — ${item.fullName}`}
                     onClick={() => handleSelectCard(item.id)}
                     onKeyDown={(e) => {
                       if (e.key === "Enter" || e.key === " ") {
                         e.preventDefault();
                         handleSelectCard(item.id);
+                      } else if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+                        e.preventDefault();
+                        focusCard(idx + 1);
+                      } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+                        e.preventDefault();
+                        if (idx === 0) searchInputRef.current?.focus();
+                        else focusCard(idx - 1);
                       }
                     }}
                     className={`relative flex flex-col justify-between p-5 rounded-xl border transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2a4d69]/40 ${
@@ -302,7 +395,7 @@ export default function AcronymsApp() {
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex items-center gap-2">
                           <span className="text-2xl font-black font-display tracking-tight text-slate-900">
-                            {item.acronym}
+                            {highlightMatch(item.acronym, searchTerm)}
                           </span>
                           {item.established && (
                             <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-500 font-mono flex items-center gap-0.5">
@@ -335,12 +428,12 @@ export default function AcronymsApp() {
 
                       {/* Agency Subtitle */}
                       <p className={`mt-2 text-xs font-bold ${isSelected ? "text-[#2a4d69]" : "text-slate-700"}`}>
-                        {item.fullName}
+                        {highlightMatch(item.fullName, searchTerm)}
                       </p>
 
                       {/* Short Description */}
                       <p className="mt-3 text-xs text-slate-500 line-clamp-3 leading-relaxed font-light">
-                        {item.description}
+                        {highlightMatch(item.description, searchTerm)}
                       </p>
                     </div>
 
