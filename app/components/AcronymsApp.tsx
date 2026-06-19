@@ -1,12 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import { acronymsData as defaultAcronyms, CATEGORIES } from "../lib/acronyms";
+import { acronymsData as defaultAcronyms } from "../lib/acronyms";
 import { siteConfig } from "../lib/site";
 import Header from "./Header";
 import {
   Search,
-  Filter,
   Check,
   ArrowUpDown,
   Grid,
@@ -25,7 +24,6 @@ import {
 export default function AcronymsApp() {
   // Static directory data — available at build time so it renders on the server.
   const acronyms = defaultAcronyms;
-  const [selectedCategory, setSelectedCategory] = useState<string>("All Categories");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortBy, setSortBy] = useState<string>("acronym-asc");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
@@ -94,11 +92,6 @@ export default function AcronymsApp() {
   const filteredAndSortedAcronyms = useMemo(() => {
     let result = [...acronyms];
 
-    // Filter by selected category pill
-    if (selectedCategory !== "All Categories") {
-      result = result.filter(a => a.category === selectedCategory);
-    }
-
     // Filter by text search (acronym, name, or description matches)
     if (searchTerm.trim() !== "") {
       const query = searchTerm.toLowerCase().trim();
@@ -118,17 +111,20 @@ export default function AcronymsApp() {
         case "acronym-desc":
           return b.acronym.localeCompare(a.acronym);
         case "est-desc":
-          // Handle agencies with undefined establishment years by placing them at the bottom
-          const ya = a.established ? parseInt(a.established) : 0;
-          const yb = b.established ? parseInt(b.established) : 0;
-          return yb - ya;
+        case "est-asc": {
+          // Entries with no established year always sort to the bottom, regardless
+          // of direction — use ±Infinity as the missing-value sentinel.
+          const ya = a.established ? parseInt(a.established) : (sortBy === "est-asc" ? Infinity : -Infinity);
+          const yb = b.established ? parseInt(b.established) : (sortBy === "est-asc" ? Infinity : -Infinity);
+          return sortBy === "est-asc" ? ya - yb : yb - ya;
+        }
         default:
           return 1;
       }
     });
 
     return result;
-  }, [acronyms, selectedCategory, searchTerm, sortBy]);
+  }, [acronyms, searchTerm, sortBy]);
 
   const handleSelectCard = (id: string) => {
     setSelectedId(id);
@@ -194,7 +190,8 @@ export default function AcronymsApp() {
                   >
                     <option value="acronym-asc" className="font-medium">Sort: A to Z (Acronym)</option>
                     <option value="acronym-desc" className="font-medium">Sort: Z to A (Acronym)</option>
-                    <option value="est-desc" className="font-medium">Sort: Established Year</option>
+                    <option value="est-desc" className="font-medium">Sort: Established (Newest)</option>
+                    <option value="est-asc" className="font-medium">Sort: Established (Oldest)</option>
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 pr-2.5 flex items-center">
                     <ChevronDown className="h-4 w-4 text-slate-400" />
@@ -228,30 +225,6 @@ export default function AcronymsApp() {
               </div>
             </div>
 
-            {/* Horizontal Scrollable Category Pills */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1.5 -mx-5 px-5 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
-              <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider shrink-0 mr-2 flex items-center gap-1">
-                <Filter className="h-3 w-3" /> Filters:
-              </span>
-              {CATEGORIES.map((cat) => {
-                const isActive = selectedCategory === cat;
-                return (
-                  <button
-                    key={cat}
-                    onClick={() => setSelectedCategory(cat)}
-                    className={`px-4 py-2 rounded-full text-[11px] font-bold whitespace-nowrap transition-all border ${
-                      isActive
-                        ? "bg-[#2a4d69] border-[#2a4d69] text-white shadow-xs"
-                        : "bg-[#fdfdfd] border-[#e0e0e0] text-slate-600 hover:border-[#adc2d2] hover:bg-slate-50"
-                    }`}
-                    id={`filter-pill-${cat.replace(/\s+/g, "-").toLowerCase()}`}
-                  >
-                    {cat}
-                  </button>
-                );
-              })}
-            </div>
-
           </div>
         </div>
 
@@ -262,19 +235,15 @@ export default function AcronymsApp() {
           <div className="flex items-center justify-between border-b border-slate-200 pb-3">
             <p className="text-xs text-slate-500">
               Showing <strong className="text-slate-700">{filteredAndSortedAcronyms.length}</strong> matching acronyms
-              {selectedCategory !== "All Categories" && ` in "${selectedCategory}"`}
             </p>
 
-            {(searchTerm || selectedCategory !== "All Categories") && (
+            {searchTerm && (
               <button
-                onClick={() => {
-                  setSearchTerm("");
-                  setSelectedCategory("All Categories");
-                }}
+                onClick={() => setSearchTerm("")}
                 className="text-xs font-bold text-[#2a4d69] hover:text-[#1d354b] transition-all"
                 id="clear-all-filters-btn"
               >
-                Clear all filters
+                Clear search
               </button>
             )}
           </div>
@@ -284,14 +253,11 @@ export default function AcronymsApp() {
               <AlertCircle className="mx-auto h-12 w-12 text-slate-400" />
               <h3 className="mt-4 text-base font-bold text-slate-800">No Acronyms Found</h3>
               <p className="mt-2 text-xs text-slate-500 max-w-md mx-auto">
-                We couldn&apos;t find any results matching your filters. Try entering a different keyword,
-                adding a custom acronym, or clearing active category guidelines.
+                We couldn&apos;t find any results matching your search. Try entering a different keyword,
+                or clearing the search to browse the full list.
               </p>
               <button
-                onClick={() => {
-                  setSearchTerm("");
-                  setSelectedCategory("All Categories");
-                }}
+                onClick={() => setSearchTerm("")}
                 className="mt-5 rounded-lg bg-[#2a4d69] px-4 py-2 text-xs font-bold text-white hover:bg-[#1d354b] transition-all"
                 id="reset-empty-filters-btn"
               >
@@ -372,11 +338,6 @@ export default function AcronymsApp() {
                         {item.fullName}
                       </p>
 
-                      {/* Category Label */}
-                      <span className="mt-3 inline-block rounded-md bg-[#f0f4f8] px-2.5 py-0.5 text-[10px] font-bold text-[#2a4d69] uppercase tracking-wider font-mono">
-                        {item.category}
-                      </span>
-
                       {/* Short Description */}
                       <p className="mt-3 text-xs text-slate-500 line-clamp-3 leading-relaxed font-light">
                         {item.description}
@@ -436,29 +397,13 @@ export default function AcronymsApp() {
             </div>
 
             {/* Detailed Guide Panel */}
-            <div className="rounded-xl border border-[#adc2d2]/30 bg-slate-50/50 p-6 md:p-8 space-y-6">
-              <div className="space-y-2">
-                <h4 className="text-xs font-mono font-extrabold text-[#2a4d69] uppercase tracking-wider">Categories</h4>
-                <p className="text-xs text-slate-500 font-light max-w-2xl leading-normal">
-                  We&apos;ve organized entries into the following categories to make them easier to browse:
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4.5 font-sans">
-                {CATEGORIES.map((cat, i) => (
-                  <div key={cat} className="flex gap-3">
-                    <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#2a4d69]/20 text-[#2a4d69] text-[10px] font-mono font-bold shrink-0 mt-0.5">
-                      0{i+1}
-                    </span>
-                    <div>
-                      <span className="block text-xs font-bold text-slate-800">{cat}</span>
-                      <span className="block text-[11px] text-slate-500 font-light mt-0.5">
-                        Acronyms related to {cat.toLowerCase()}.
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="rounded-xl border border-[#adc2d2]/30 bg-slate-50/50 p-6 md:p-8 space-y-4">
+              <h4 className="text-xs font-mono font-extrabold text-[#2a4d69] uppercase tracking-wider">How to use it</h4>
+              <p className="text-xs text-slate-500 font-light max-w-2xl leading-relaxed">
+                Search by the acronym itself (e.g. NHT, HEART), the full expanded name, or any keyword
+                from the description. Tap any result to see its full name, the year it was established,
+                and a short overview of what the organization does.
+              </p>
             </div>
 
             {/* Quick Action bar: Submit form or browse listings */}
@@ -507,23 +452,8 @@ export default function AcronymsApp() {
             id="profile-modal-content"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Header banner */}
-            <div className="bg-[#f0f4f8] border-b border-[#e0e0e0] px-6 py-4 flex items-center justify-between">
-              <span className="inline-block rounded bg-[#2a4d69]/10 px-2.5 py-1 text-[10px] font-bold text-[#2a4d69] font-mono uppercase tracking-wider">
-                {currentSelectedAcronym.category}
-              </span>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="p-1.5 text-slate-400 hover:bg-slate-200/60 hover:text-slate-700 rounded-full transition-all"
-                id="close-modal-x-btn"
-                aria-label="Close"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-
             {/* Profile Content Body */}
-            <div className="p-6 md:p-8 flex flex-col gap-6 overflow-y-auto max-h-[70vh]">
+            <div className="p-6 md:p-8 flex flex-col gap-6 overflow-y-auto max-h-[80vh]">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h2
@@ -536,21 +466,31 @@ export default function AcronymsApp() {
                     {currentSelectedAcronym.fullName}
                   </h3>
                 </div>
-                <button
-                  onClick={(e) => {
-                    const shareObj = new URL(window.location.href);
-                    shareObj.searchParams.set("id", currentSelectedAcronym.id);
-                    handleCopyText(`share-${currentSelectedAcronym.id}`, shareObj.toString(), e, "Link copied to clipboard");
-                  }}
-                  className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition shrink-0 mt-1"
-                  title="Copy link"
-                >
-                  {copiedStates[`share-${currentSelectedAcronym.id}`] ? (
-                    <Check className="h-5 w-5 text-emerald-600" />
-                  ) : (
-                    <LinkIcon className="h-5 w-5" />
-                  )}
-                </button>
+                <div className="flex items-center gap-1 shrink-0 -mt-1 -mr-1">
+                  <button
+                    onClick={(e) => {
+                      const shareObj = new URL(window.location.href);
+                      shareObj.searchParams.set("id", currentSelectedAcronym.id);
+                      handleCopyText(`share-${currentSelectedAcronym.id}`, shareObj.toString(), e, "Link copied to clipboard");
+                    }}
+                    className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition"
+                    title="Copy link"
+                  >
+                    {copiedStates[`share-${currentSelectedAcronym.id}`] ? (
+                      <Check className="h-5 w-5 text-emerald-600" />
+                    ) : (
+                      <LinkIcon className="h-5 w-5" />
+                    )}
+                  </button>
+                  <button
+                    onClick={() => setIsModalOpen(false)}
+                    className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
+                    id="close-modal-x-btn"
+                    aria-label="Close"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
               </div>
 
               <div className="border-y border-slate-100 py-4 font-mono text-xs">

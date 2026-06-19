@@ -23,23 +23,6 @@ body:
       placeholder: e.g. National Housing Trust
     validations:
       required: true
-  - type: dropdown
-    id: category
-    attributes:
-      label: Category
-      description: Which sector does this acronym belong to?
-      options:
-        - Government & Public Sector
-        - Business & Finance
-        - Education
-        - Health
-        - Security & Justice
-        - Infrastructure
-        - Culture, Sports & Entertainment
-        - Technology
-        - Other
-    validations:
-      required: true
   - type: textarea
     id: description
     attributes:
