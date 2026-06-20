@@ -7,357 +7,631 @@
     "established": "1962"
   },
   {
-    "id": "mofps",
-    "acronym": "MOFPS",
-    "fullName": "Ministry of Finance and the Public Service",
-    "description": "Responsible for planning and executing the government's fiscal policies, compiling the national budget, managing public debt, administering taxation regimes, and driving public sector modernization to foster economic stability and growth."
+    "id": "ooc",
+    "acronym": "OoC",
+    "fullName": "Office of the Cabinet",
+    "description": "Provides strategic administrative support, guidance, and policy coordination to the Cabinet of Jamaica\u2014the highest decision-making executive body in the land.",
+    "established": "1962"
+  },
+  {
+    "id": "mces",
+    "acronym": "MCES",
+    "fullName": "Ministry of Culture, Gender, Entertainment and Sport",
+    "description": "Responsible for cultivating national identity, safeguarding cultural heritage, promoting gender equity, supporting sports development, and fostering the creative industries.",
+    "established": "2016"
   },
   {
     "id": "mns",
     "acronym": "MNS",
     "fullName": "Ministry of National Security",
-    "description": "Charged with protecting Jamaica's national sovereignty, keeping public order, and supervising national law enforcement agencies (such as the Constabulary and Military), correctional systems, and border entry regulations."
+    "description": "Charged with protecting Jamaica's national sovereignty, keeping public order, and supervising national law enforcement agencies (such as the Constabulary and Military), correctional systems, and border entry regulations.",
+    "established": "1962"
   },
   {
     "id": "mohw",
     "acronym": "MOHW",
     "fullName": "Ministry of Health and Wellness",
-    "description": "Sets national medical policies, administers the public healthcare system, operates community clinics and primary/secondary hospitals, and drives national initiatives for physical, mental, and nutritional health and wellness."
+    "description": "Responsible for the overall management and delivery of public healthcare services in Jamaica, formulating policies and managing public clinical institutions.",
+    "established": "1962"
   },
   {
-    "id": "mey",
-    "acronym": "MEY",
+    "id": "mofps",
+    "acronym": "MOFPS",
+    "fullName": "Ministry of Finance and the Public Service",
+    "description": "Responsible for planning and executing the government's financial policies, managing the national budget, public debt, taxation, and public sector human resources.",
+    "established": "1962"
+  },
+  {
+    "id": "moey",
+    "acronym": "MOEY",
     "fullName": "Ministry of Education and Youth",
-    "description": "Directs educational policies and public institutions spanning early childhood, primary, secondary, and tertiary training. It also shapes comprehensive youth development, guidance, support, and engagement frameworks across Jamaica."
+    "description": "Guides and regulates public education, early childhood through tertiary institutions, curriculum development, and youth empowerment initiatives.",
+    "established": "1962"
   },
   {
-    "id": "msetc",
-    "acronym": "MSETC",
-    "fullName": "Ministry of Science, Energy, Telecommunications and Transport",
-    "description": "Fosters digital innovation, steers chemical and physical science portfolios, directs energy efficiency goals, oversees national telecommunications licenses, and administers regulatory controls over road, rail, air, and marine transport."
-  },
-  {
-    "id": "mwlejc",
-    "acronym": "MWLEJC",
-    "fullName": "Ministry of Economic Growth and Job Creation",
-    "description": "Coordinates national infrastructure, housing policies, spatial land-use planning, environmental protection, climate resilience initiatives, water asset management, and macro investment portfolios intended to generate employment."
+    "id": "mjd",
+    "acronym": "MJD",
+    "fullName": "Ministry of Justice",
+    "description": "Formulates policies and administers services to support the courts, legal aid, restorative justice, victim support, and law reform.",
+    "established": "1962"
   },
   {
     "id": "mfaft",
     "acronym": "MFAFT",
     "fullName": "Ministry of Foreign Affairs and Foreign Trade",
-    "description": "Represents Jamaica's interests in global affairs, maintains sovereign diplomatic interactions, services the diaspora worldwide, and conducts foreign trade negotiations to boost economic development.",
+    "description": "Responsible for formulating and implementing Jamaica's foreign policy, foreign trade negotiations, and managing relations with international bodies.",
     "established": "1962"
   },
   {
-    "id": "mcges",
-    "acronym": "MCGES",
-    "fullName": "Ministry of Culture, Gender, Entertainment and Sport",
-    "description": "Preserves Jamaica's cultural heritage, expands creative industries, implements gender equality measures, protects vulnerable populations, and promotes community sports and high-performance athletic achievement."
+    "id": "mlss",
+    "acronym": "MLSS",
+    "fullName": "Ministry of Labour and Social Security",
+    "description": "Manages public welfare programs, national insurance pensions, labor relations, employment programs, and social security safety nets.",
+    "established": "1962"
   },
   {
-    "id": "moaf",
-    "acronym": "MOAF",
-    "fullName": "Ministry of Agriculture, Fisheries and Mining",
-    "description": "Drives food security, coordinates agricultural extensions, supports aquaculture and fisheries, regulates mineral exploration, bauxite extraction, and oversees sustainable land utilization practices."
+    "id": "mot",
+    "acronym": "MOT",
+    "fullName": "Ministry of Tourism",
+    "description": "Coordinates tourism development, travel marketing, hospitality training, and legislative oversight to foster tourism sector growth.",
+    "established": "1962"
+  },
+  {
+    "id": "mlgcd",
+    "acronym": "MLGCD",
+    "fullName": "Ministry of Local Government and Community Development",
+    "description": "Coordinates local government administrations, municipal corporations, public sanitation, community projects, and disaster preparedness.",
+    "established": "1962"
+  },
+  {
+    "id": "msett",
+    "acronym": "MSETT",
+    "fullName": "Ministry of Science, Energy, Telecommunications and Transport",
+    "description": "Restructured ministry responsible for national policies in information communications technology, public transport networks, and energy security.",
+    "established": "2023"
   },
   {
     "id": "boj",
     "acronym": "BOJ",
     "fullName": "Bank of Jamaica",
-    "description": "The central bank of Jamaica. Formulates monetary policy, manages currency circulation, acts as the lender of last resort, maintains foreign exchange reserves, and oversees commercial banks to guarantee financial sector stability.",
+    "description": "The central bank of Jamaica, responsible for formulating monetary policy, maintaining price and exchange rate stability, and supervising deposit-taking institutions.",
     "established": "1960"
-  },
-  {
-    "id": "taj",
-    "acronym": "TAJ",
-    "fullName": "Tax Administration Jamaica",
-    "description": "The principal tax collection and auditing authority. Operates tax offices, promotes voluntary compliance, administers corporate and individual tax assessments, collected duties, and modernizes electronic payment systems.",
-    "established": "2011"
-  },
-  {
-    "id": "statin",
-    "acronym": "STATIN",
-    "fullName": "Statistical Institute of Jamaica",
-    "description": "The national statistical agency. Collects, processes, and publishes demographic, sociological, and economic data, such as national population censuses, employment surveys, inflation rates, and GDP calculations.",
-    "established": "1946"
-  },
-  {
-    "id": "pioj",
-    "acronym": "PIOJ",
-    "fullName": "Planning Institute of Jamaica",
-    "description": "A statutory planning body that designs development blueprints, tracks macroeconomic trends, monitors the progress of social outcomes, and coordinates development assistance from international agencies.",
-    "established": "1968"
-  },
-  {
-    "id": "dbj",
-    "acronym": "DBJ",
-    "fullName": "Development Bank of Jamaica",
-    "description": "A state-owned development finance institution providing medium/long-term funding, equity support, technical coaching, and guarantees to MSMEs, infrastructure projects, and public-private partnerships."
-  },
-  {
-    "id": "jampro",
-    "acronym": "JAMPRO",
-    "fullName": "Jamaica Promotions Corporation",
-    "description": "The national agency responsible for marketing Jamaica as a prime destination for direct foreign investment. Focuses on export development, business matching, and lowering the barriers to starting enterprises.",
-    "established": "1988"
-  },
-  {
-    "id": "fsc",
-    "acronym": "FSC",
-    "fullName": "Financial Services Commission",
-    "description": "A regulatory oversight agency monitoring non-deposit-taking financial institutions. Supervises insurance providers, private pension administrators, securities broker-dealers, and mutual fund structures.",
-    "established": "2001"
-  },
-  {
-    "id": "cac",
-    "acronym": "CAC",
-    "fullName": "Consumer Affairs Commission",
-    "description": "A statutory consumer advocacy body. Enforces consumer protection laws, checks market prices, investigates consumer complaints of unfair billing, and executes diagnostic tests on consumer goods."
-  },
-  {
-    "id": "ftc",
-    "acronym": "FTC",
-    "fullName": "Fair Trading Commission",
-    "description": "The administrative tribunal responsible for enforcing the Fair Competition Act. It acts against monopolistic cartels, misleading advertising, price collusion, and actions restricting market entry.",
-    "established": "1993"
-  },
-  {
-    "id": "ncra",
-    "acronym": "NCRA",
-    "fullName": "National Compliance and Regulatory Authority",
-    "description": "An agency of the Ministry of Industry, Investment and Commerce. Enforces food safety standards, compulsory trade regulations, packaging guidelines, and regulatory metrology to safeguard consumer health.",
-    "established": "2016"
-  },
-  {
-    "id": "jcf",
-    "acronym": "JCF",
-    "fullName": "Jamaica Constabulary Force",
-    "description": "The primary civil law enforcement agency. Tasked with crime prevention, intelligence operations, maintenance of public order, dynamic road traffic management, and assisting criminal prosecutions.",
-    "established": "1867"
-  },
-  {
-    "id": "jdf",
-    "acronym": "JDF",
-    "fullName": "Jamaica Defence Force",
-    "description": "The sovereign military organization, comprising land, air, and maritime units. Coordinates coastal defense, anti-smuggling patrols, disaster relief response, and collaborates on high-intensity local police operations.",
-    "established": "1962"
-  },
-  {
-    "id": "moca",
-    "acronym": "MOCA",
-    "fullName": "Major Organised Crime and Anti-Corruption Agency",
-    "description": "A specialized elite law enforcement authority targeting drug cartels, cyber crimes, money laundering, state extortion networks, and instances of high-level corruption inside public administration.",
-    "established": "2014"
-  },
-  {
-    "id": "indecom",
-    "acronym": "INDECOM",
-    "fullName": "Independent Commission of Investigations",
-    "description": "A fully civilian-led commission set up to investigate instances of physical harm, shootings, death, or structural misconduct involving members of the security forces, prison wardens, and correctional officers.",
-    "established": "2010"
-  },
-  {
-    "id": "pica",
-    "acronym": "PICA",
-    "fullName": "Passport, Immigration and Citizenship Agency",
-    "description": "The executive agency administering passport services, processing applications for dual citizenship, regulating visa entries, maintaining border gates, and processing tourist/alien residency papers.",
-    "established": "2007"
-  },
-  {
-    "id": "fla",
-    "acronym": "FLA",
-    "fullName": "Firearm Licensing Authority",
-    "description": "Regulates and manages the legal possession of guns by civilian residents. Conducts thorough background checks, executes ballistic certifications, and maintains a strict database of civilian arms and ammo.",
-    "established": "2006"
-  },
-  {
-    "id": "eoj",
-    "acronym": "EOJ",
-    "fullName": "Electoral Office of Jamaica",
-    "description": "The administrative engine implementing general elections, municipal polls, and voter registrations. Keeps the voter ID database, issues national voter cards, and prints ballots.",
-    "established": "1943"
-  },
-  {
-    "id": "ecj",
-    "acronym": "ECJ",
-    "fullName": "Electoral Commission of Jamaica",
-    "description": "The independent multi-partisan commission crafting the rules for electoral registration, dividing constituency lines, managing campaign finance transparency, and overseeing the EOJ.",
-    "established": "2006"
-  },
-  {
-    "id": "odpem",
-    "acronym": "ODPEM",
-    "fullName": "Office of Disaster Preparedness and Emergency Management",
-    "description": "The national agency coordinating comprehensive disaster management, emergency shelters, public warnings for floods and hurricanes, and risk mitigation strategies across Jamaica.",
-    "established": "1980"
-  },
-  {
-    "id": "nwa",
-    "acronym": "NWA",
-    "fullName": "National Works Agency",
-    "description": "Plans and builds main arterial corridors, federal highways, drainage culverts, bridges, and controls urban smart traffic lights to maximize vehicular flow and maintain resilient structural links.",
-    "established": "2001"
-  },
-  {
-    "id": "nwc",
-    "acronym": "NWC",
-    "fullName": "National Water Commission",
-    "description": "The prime utility provider for water sanitization and distribution. It oversees water reservoirs, treatment filtration facilities, and sewer mains, feeding clean municipal tap water islandwide.",
-    "established": "1980"
   },
   {
     "id": "nepa",
     "acronym": "NEPA",
     "fullName": "National Environment and Planning Agency",
-    "description": "The prime environmental sentinel and spatial mapping regulator. Decides on development permits, conducts environmental impact audits, protects marine sanctuaries, and enforces pollution limits.",
+    "description": "Tasked with natural resource protection, sustainable environmental management, physical town and country planning, and development permitting.",
     "established": "2001"
   },
   {
-    "id": "nswma",
-    "acronym": "NSWMA",
-    "fullName": "National Solid Waste Management Authority",
-    "description": "Maintains civic public hygiene by collecting, recycling, and disposing of solid waste. Standardizes trash transport services, runs municipal garbage routes, and operates national parks and landfills.",
+    "id": "nwa",
+    "acronym": "NWA",
+    "fullName": "National Works Agency",
+    "description": "Responsible for planning, constructing, and maintaining Jamaica's main road network, bridges, flood control systems, and public civil works.",
     "established": "2001"
   },
   {
-    "id": "our",
-    "acronym": "OUR",
-    "fullName": "Office of Utilities Regulation",
-    "description": "Statutory regulator protecting consumers in the energy, water, telecommunications, and transit sectors. Approves rate reviews, handles infrastructure complaints, and sets benchmark efficiency rates.",
-    "established": "1997"
-  },
-  {
-    "id": "udc",
-    "acronym": "UDC",
-    "fullName": "Urban Development Corporation",
-    "description": "A master developer steering sustainable physical reclamation and city-planning. Spearheads commercial urban hubs, manages tourist beaches, parks, and oversees property inventory inside targeted growth areas.",
-    "established": "1968"
+    "id": "statin",
+    "acronym": "STATIN",
+    "fullName": "Statistical Institute of Jamaica",
+    "description": "National statistical agency with the authority to collect, compile, analyze, abstract, and publish demographic, social, and economic data.",
+    "established": "1984"
   },
   {
     "id": "jutc",
     "acronym": "JUTC",
-    "fullName": "Jamaica Urban Transit Company",
-    "description": "The major public bus service operator, executing scheduled urban transit routes linking Kingston, St. Andrew, Portmore, Spanish Town, and parts of rural St. Thomas.",
+    "fullName": "Jamaica Urban Transit Corporation Limited",
+    "description": "State-owned municipal bus company providing public transportation services within the Kingston Metropolitan Transport Region (KMTR).",
     "established": "1998"
   },
   {
-    "id": "sma",
-    "acronym": "SMA",
-    "fullName": "Spectrum Management Authority",
-    "description": "The federal frequency guardian. Manages public airwaves, issues radio-frequency licenses, prevents transmissions interference, and sets terms for wireless telecom connections.",
-    "established": "2000"
-  },
-  {
-    "id": "paj",
-    "acronym": "PAJ",
-    "fullName": "Port Authority of Jamaica",
-    "description": "Owns and develops deepwater maritime harbors, container terminals, and foreign free-zones. It monitors shipping lane dredge depths, port defenses, and tourist cruise-ship piers.",
-    "established": "1972"
-  },
-  {
-    "id": "haj",
-    "acronym": "HAJ",
-    "fullName": "Housing Agency of Jamaica",
-    "description": "An executive agency sub-portfolio under economic growth ministries. Tasks itself with fabricating affordable housing solutions, regularizing informal communities, and issuing legal land titles.",
-    "established": "1998"
-  },
-  {
-    "id": "nla",
-    "acronym": "NLA",
-    "fullName": "National Land Agency",
-    "description": "The primary registry for titles, maps, land valuation indexes, and crown lands. It modernizes land tenure security and integrates spatial land mapping into a single portal.",
-    "established": "2001"
-  },
-  {
-    "id": "nrsc",
-    "acronym": "NRSC",
-    "fullName": "National Road Safety Council",
-    "description": "A centralized public safety body chaired by the Prime Minister. Coordinates road fatality reduction campaigns, analyzes traffic collision telemetry, and revises highway safety policies.",
-    "established": "1993"
-  },
-  {
-    "id": "narra",
-    "acronym": "NaRRA",
-    "fullName": "National Reconstruction and Resilience Authority",
-    "description": "The National Reconstruction and Resilience Authority is a time-bound statutory agency in Jamaica established to accelerate post-hurricane rebuilding and infrastructure resilience. Created to bypass slow bureaucratic processes, its goal is to manage recovery funding efficiently and 'build back better' following the devastation of Hurricane Melissa.",
-    "established": "2026"
-  },
-  {
-    "id": "nht",
-    "acronym": "NHT",
-    "fullName": "National Housing Trust",
-    "description": "A landmark social-trust fund funded through joint salary levies. Finances affordable housing developments, awards low-interest home loans, and provides housing support to low-income contributors.",
-    "established": "1976"
-  },
-  {
-    "id": "heart",
+    "id": "heart_nsta",
     "acronym": "HEART/NSTA",
-    "fullName": "Human Employment and Resource Training / National Service Training Agency",
-    "description": "The chief vocational development, technical trade, and workforce apprenticeship certifier. Empowers youth with recognized professional credentials across computing, cuisine, mechanics, and carpentry.",
+    "fullName": "Human Employment and Resource Training / National Service Training Agency Trust",
+    "description": "Jamaica's leading provider of technical and vocational education and training, offering certifications to build a highly skilled workforce.",
     "established": "1982"
-  },
-  {
-    "id": "path",
-    "acronym": "PATH",
-    "fullName": "Programme of Advancement Through Health and Education",
-    "description": "An intensive social safety transfer net. Connects conditional cash grants, free health screenings, and school lunch subsidies to low-resource families to eliminate intergenerational poverty.",
-    "established": "2001"
-  },
-  {
-    "id": "nis",
-    "acronym": "NIS",
-    "fullName": "National Insurance Scheme",
-    "description": "An integrated social security safety net. Collects national insurance contributions to offer retirement pensions, industrial injury benefits, invalidity payouts, and widows' support services.",
-    "established": "1966"
-  },
-  {
-    "id": "rgd",
-    "acronym": "RGD",
-    "fullName": "Registrar General's Department",
-    "description": "The sole official repository for vital civil statuses. Registers and issues legal certificates for births, marriages, adoptions, deaths, deeds, and manages the national deeds registers.",
-    "established": "1879"
-  },
-  {
-    "id": "ecc",
-    "acronym": "ECC",
-    "fullName": "Early Childhood Commission",
-    "description": "Regulates and monitors infant schools and daycares. Outlines development standards, safety guidelines, and early-learning curricula to secure solid childhood development blocks.",
-    "established": "2003"
-  },
-  {
-    "id": "src",
-    "acronym": "SRC",
-    "fullName": "Scientific Research Council",
-    "description": "Coordinates and prompts innovative science and technology research. Develops indigenous waste-treatment bio-digesters, assays local plants for medicine, and counsels food entrepreneurs on stabilization.",
-    "established": "1960"
-  },
-  {
-    "id": "chase",
-    "acronym": "CHASE",
-    "fullName": "Culture, Health, Arts, Sports and Education",
-    "description": "A dedicated foundation allocating funding generated via sports betting and lotteries to grant-aid early education schools, support healthcare equipment, and bankroll youth sporting programs.",
-    "established": "2002"
   },
   {
     "id": "jadco",
     "acronym": "JADCO",
     "fullName": "Jamaica Anti-Doping Commission",
-    "description": "Supervises and executes drug testing protocols for Jamaican athletes in accordance with the World Anti-Doping Agency (WADA) codes, promoting clean sport and professional athletic fairplay.",
+    "description": "Executes anti-doping programs in compliance with the World Anti-Doping Agency (WADA) Code to preserve athletic integrity.",
     "established": "2008"
   },
   {
     "id": "jipo",
     "acronym": "JIPO",
     "fullName": "Jamaica Intellectual Property Office",
-    "description": "Protects and registers intellectual property rights. Administers laws surrounding copyright works, design patents, industrial designs, manufacturing marks, and traditional geographical indications.",
+    "description": "Administers and enforces laws related to intellectual property, including patents, trademarks, industrial designs, and copyrights.",
     "established": "2001"
+  },
+  {
+    "id": "jampro",
+    "acronym": "JAMPRO",
+    "fullName": "Jamaica Promotions Corporation",
+    "description": "Government investment and export promotion agency, working to attract foreign direct investments and expand local trade markets.",
+    "established": "1988"
+  },
+  {
+    "id": "our",
+    "acronym": "OUR",
+    "fullName": "Office of Utilities Regulation",
+    "description": "Independent regulatory body of utility services, regulating electricity, water, sewerage, and telecommunication tariffs and standards.",
+    "established": "1997"
+  },
+  {
+    "id": "dbj",
+    "acronym": "DBJ",
+    "fullName": "Development Bank of Jamaica Limited",
+    "description": "Provides development finance, grants, and technical capacity-building resources to private enterprises and MSMEs.",
+    "established": "2000"
+  },
+  {
+    "id": "indecom",
+    "acronym": "INDECOM",
+    "fullName": "Independent Commission of Investigations",
+    "description": "Independent parliamentary commission tasked with investigating human rights abuses and deaths caused by state security forces.",
+    "established": "2010"
+  },
+  {
+    "id": "pioj",
+    "acronym": "PIOJ",
+    "fullName": "Planning Institute of Jamaica",
+    "description": "Foremost national planning agency coordinating development of social, economic, and environmental policies under Vision 2030.",
+    "established": "1984"
+  },
+  {
+    "id": "nswma",
+    "acronym": "NSWMA",
+    "fullName": "National Solid Waste Management Authority",
+    "description": "Statutory body responsible for waste collection, sanitary transportation, landfill site management, and municipal regulatory enforcement.",
+    "established": "2001"
+  },
+  {
+    "id": "jsif",
+    "acronym": "JSIF",
+    "fullName": "Jamaica Social Investment Fund",
+    "description": "Mobilizes funding from international development partners to finance community-driven socio-economic development and poverty alleviation projects.",
+    "established": "1996"
+  },
+  {
+    "id": "udc",
+    "acronym": "UDC",
+    "fullName": "Urban Development Corporation",
+    "description": "Statutory body leading sustainable urban and rural real estate development, town planning, and public attractions management.",
+    "established": "1968"
+  },
+  {
+    "id": "tpdco",
+    "acronym": "TPDCo",
+    "fullName": "Tourism Product Development Company Limited",
+    "description": "Tasked with enhancing the destination quality, safety standards, worker training, and infrastructure of the Jamaican tourism product.",
+    "established": "1996"
+  },
+  {
+    "id": "pica",
+    "acronym": "PICA",
+    "fullName": "Passport, Immigration and Citizenship Agency",
+    "description": "Executive agency issuing travel passports, administering border control protocols, and processing residency and citizenship applications.",
+    "established": "2007"
+  },
+  {
+    "id": "rgd",
+    "acronym": "RGD",
+    "fullName": "Registrar General's Department",
+    "description": "Sole national registry responsible for civil records of births, marriages, deaths, and vital demographic statistics.",
+    "established": "1879"
+  },
+  {
+    "id": "nla",
+    "acronym": "NLA",
+    "fullName": "National Land Agency",
+    "description": "Consolidates national land titles, geographic maps, evaluations, and estate management of public Crown lands.",
+    "established": "2001"
+  },
+  {
+    "id": "tef",
+    "acronym": "TEF",
+    "fullName": "Tourism Enhancement Fund",
+    "description": "Public body financing capital initiatives, infrastructure upgrades, and cultural heritage preservation supporting the Tourism Master Plan.",
+    "established": "2005"
+  },
+  {
+    "id": "taj",
+    "acronym": "TAJ",
+    "fullName": "Tax Administration Jamaica",
+    "description": "The Semi-Autonomous Revenue Authority (SARA) of Jamaica, responsible for domestic tax collection and revenue law enforcement.",
+    "established": "2011"
+  },
+  {
+    "id": "fsc",
+    "acronym": "FSC",
+    "fullName": "Financial Services Commission",
+    "description": "Supervises and regulates non-deposit-taking financial entities, including insurance companies, securities brokers, and private pension funds.",
+    "established": "2001"
+  },
+  {
+    "id": "src",
+    "acronym": "SRC",
+    "fullName": "Scientific Research Council",
+    "description": "Coordinates and executes scientific research to support the sustainable commercial utilization of Jamaica's natural resources.",
+    "established": "1960"
+  },
+  {
+    "id": "nwc",
+    "acronym": "NWC",
+    "fullName": "National Water Commission",
+    "description": "The primary public utility provider of clean drinking water supply, catchment treatment, and wastewater sanitation services.",
+    "established": "1980"
+  },
+  {
+    "id": "rada",
+    "acronym": "RADA",
+    "fullName": "Rural Agricultural Development Authority",
+    "description": "Jamaica's chief agricultural extension agency, providing technical training, agrarian resource management, and rural development support.",
+    "established": "1990"
+  },
+  {
+    "id": "nht",
+    "acronym": "NHT",
+    "fullName": "National Housing Trust",
+    "description": "Mobilizes mandatory payroll contributions to construct affordable housing and provide low-interest mortgages to contributors.",
+    "established": "1976"
+  },
+  {
+    "id": "narra",
+    "acronym": "NaRRA",
+    "fullName": "National Reconstruction and Resilience Authority",
+    "description": "OPM's primary executive agency for managing and coordinating multi-year post-disaster rebuilding projects after major environmental hazards.",
+    "established": "2026"
+  },
+  {
+    "id": "jca",
+    "acronym": "JCA",
+    "fullName": "Jamaica Customs Agency",
+    "description": "Executes border security checks, trade tariff assessment, import/export custom collections, and shipping container clearance.",
+    "established": "1877"
+  },
+  {
+    "id": "mind",
+    "acronym": "MIND",
+    "fullName": "Management Institute for National Development",
+    "description": "The pre-eminent training and leadership development institution for civil servants and public sector administrators.",
+    "established": "1999"
+  },
+  {
+    "id": "jfb",
+    "acronym": "JFB",
+    "fullName": "Jamaica Fire Brigade",
+    "description": "The national fire service responsible for firefighting, disaster search-and-rescues, and emergency medical services (EMS).",
+    "established": "1871"
+  },
+  {
+    "id": "jbdc",
+    "acronym": "JBDC",
+    "fullName": "Jamaica Business Development Corporation",
+    "description": "Provides professional mentorship, incubation services, technical training, and market access support to MSMEs.",
+    "established": "2001"
+  },
+  {
+    "id": "jtb",
+    "acronym": "JTB",
+    "fullName": "Jamaica Tourist Board",
+    "description": "The national tourism marketing organization, promoting the country globally as a preferred travel and leisure destination.",
+    "established": "1955"
+  },
+  {
+    "id": "coj",
+    "acronym": "COJ",
+    "fullName": "Companies Office of Jamaica",
+    "description": "Executive agency administering the registrations, filings, and regulatory compliance of local/foreign corporations and LLCs.",
+    "established": "1975"
+  },
+  {
+    "id": "nic",
+    "acronym": "NIC",
+    "fullName": "National Irrigation Commission Limited",
+    "description": "Statutory body managing, operating, and expanding the nation's public agricultural water irrigation schemes and grids.",
+    "established": "1986"
+  },
+  {
+    "id": "psoj",
+    "acronym": "PSOJ",
+    "fullName": "The Private Sector Organisation of Jamaica",
+    "description": "Umbrella business advocacy organization lobbying for corporate-friendly economic, regulatory, and developmental policies.",
+    "established": "1976"
+  },
+  {
+    "id": "jcc_private",
+    "acronym": "JCC",
+    "fullName": "Jamaica Chamber of Commerce",
+    "description": "Member-supported mercantile association promoting domestic trade, business networking, and urban redevelopment.",
+    "established": "1779"
+  },
+  {
+    "id": "jmea",
+    "acronym": "JMEA",
+    "fullName": "Jamaica Manufacturers and Exporters Association",
+    "description": "Leading industrial voice promoting manufacturing growth, export market research, and local trade shows.",
+    "established": "2018"
+  },
+  {
+    "id": "sbaj",
+    "acronym": "SBAJ",
+    "fullName": "Small Business Association of Jamaica",
+    "description": "Lobbies for micro and small enterprises, working to secure microfinance options and business formalization training.",
+    "established": "1974"
+  },
+  {
+    "id": "jba",
+    "acronym": "JBA",
+    "fullName": "Jamaica Bankers Association",
+    "description": "Representing the interests of licensed commercial and investment banks, coordinating industry security standards.",
+    "established": "1973"
+  },
+  {
+    "id": "jse",
+    "acronym": "JSE",
+    "fullName": "Jamaica Stock Exchange Limited",
+    "description": "Operates the principal stock exchanges, managing listing indexes and capital raises for public corporations.",
+    "established": "1968"
+  },
+  {
+    "id": "jmmb",
+    "acronym": "JMMB",
+    "fullName": "JMMB Group Limited",
+    "description": "Regional financial conglomerate offering wealth management, stock brokerage, retail banking, and insurance services.",
+    "established": "1992"
+  },
+  {
+    "id": "vmbs",
+    "acronym": "VMBS",
+    "fullName": "Victoria Mutual Building Society",
+    "description": "Mutual financial group offering savings accounts, residential mortgages, wealth management, and remittance services.",
+    "established": "1878"
+  },
+  {
+    "id": "jn_group",
+    "acronym": "JN Group",
+    "fullName": "Jamaica National Group",
+    "description": "Mutual banking and financial group offering retail bank accounts, general insurance, and international remittances.",
+    "established": "1874"
+  },
+  {
+    "id": "jacap",
+    "acronym": "JACAP",
+    "fullName": "Jamaica Association of Composers, Authors and Publishers Limited",
+    "description": "Collective management organization licensing public performances and distributing royalties to music creators and publishers.",
+    "established": "1998"
+  },
+  {
+    "id": "jamms",
+    "acronym": "JAMMS",
+    "fullName": "Jamaica Music Society",
+    "description": "Copyright licensing body collecting and distributing broadcast royalties for record producers and performance artists.",
+    "established": "2007"
+  },
+  {
+    "id": "jcdc",
+    "acronym": "JCDC",
+    "fullName": "Jamaica Cultural Development Commission",
+    "description": "Organizes national festivals, independence celebrations, and talent competitions to preserve and develop cultural heritage.",
+    "established": "1963"
+  },
+  {
+    "id": "chase_fund",
+    "acronym": "CHASE Fund",
+    "fullName": "Culture, Health, Arts, Sports and Education Fund",
+    "description": "Channels statutory levies from lottery and gaming companies to finance social development, arts, and educational grants.",
+    "established": "2002"
+  },
+  {
+    "id": "jafta",
+    "acronym": "JAFTA",
+    "fullName": "Jamaica Film and Television Association",
+    "description": "Non-profit professional guild representing local filmmakers, directors, and actors, running creative screen workshops.",
+    "established": "2015"
+  },
+  {
+    "id": "jftm",
+    "acronym": "JFTM",
+    "fullName": "Jamaica Federation of Musicians and Affiliated Union",
+    "description": "Musicians trade union negotiating fair wage agreements, performing standards, and hotel entertainer contracts.",
+    "established": "1958"
+  },
+  {
+    "id": "cciaj",
+    "acronym": "CCIAJ",
+    "fullName": "Cultural & Creative Industries Association of Jamaica",
+    "description": "Umbrella creative association advocating for intellectual property monetization, business formalization, and artist registry benefits.",
+    "established": "2020"
+  },
+  {
+    "id": "jbu",
+    "acronym": "JBU",
+    "fullName": "Jamaica Baptist Union",
+    "description": "Denominational church union with a rich history in emancipation, coordinating school administrations and pastoral training.",
+    "established": "1849"
+  },
+  {
+    "id": "ucjci",
+    "acronym": "UCJCI",
+    "fullName": "United Church in Jamaica and the Cayman Islands",
+    "description": "Reformed denomination managing high schools, youth development platforms, and theological outreach ministries.",
+    "established": "1965"
+  },
+  {
+    "id": "jcc_religious",
+    "acronym": "JCC",
+    "fullName": "Jamaica Council of Churches",
+    "description": "Ecumenical body bringing together diverse Christian denominations to coordinate joint social initiatives and moral policies.",
+    "established": "1941"
+  },
+  {
+    "id": "doj",
+    "acronym": "DOJ",
+    "fullName": "Diocese of Jamaica and the Cayman Islands",
+    "description": "Historic Anglican body managing national parish networks, secondary colleges, and civic community centers.",
+    "established": "1824"
+  },
+  {
+    "id": "juc",
+    "acronym": "JUC",
+    "fullName": "Jamaica Union Conference of Seventh-day Adventists",
+    "description": "Apex administrative body supervising Adventist health networks, universities, and regional educational districts.",
+    "established": "2010"
+  },
+  {
+    "id": "jta",
+    "acronym": "JTA",
+    "fullName": "Jamaica Teachers' Association",
+    "description": "The largest professional trade union for public school educators, negotiating civil labor contracts and school improvements.",
+    "established": "1964"
+  },
+  {
+    "id": "uwi",
+    "acronym": "UWI",
+    "fullName": "The University of the West Indies",
+    "description": "Premier regional tertiary research and educational institution, with its flagship campus located at Mona.",
+    "established": "1948"
+  },
+  {
+    "id": "utech",
+    "acronym": "UTech",
+    "fullName": "University of Technology, Jamaica",
+    "description": "Leading public polytechnic university offering undergraduate and postgraduate degrees in science, engineering, and tech.",
+    "established": "1958"
+  },
+  {
+    "id": "jfj",
+    "acronym": "JFJ",
+    "fullName": "Jamaicans for Justice",
+    "description": "Non-governmental human rights organization providing pro-bono legal support and monitoring state enforcement actions.",
+    "established": "1999"
+  },
+  {
+    "id": "cvss",
+    "acronym": "CVSS",
+    "fullName": "Council of Voluntary Social Services",
+    "description": "The oldest and largest coordinating body for voluntary agencies and non-profit charitable organizations in Jamaica.",
+    "established": "1940"
+  },
+  {
+    "id": "jccul",
+    "acronym": "JCCUL",
+    "fullName": "Jamaica Co-operative Credit Union League",
+    "description": "Trade organization offering administrative, deposit insurance, and regulatory services to credit unions.",
+    "established": "1942"
+  },
+  {
+    "id": "jas",
+    "acronym": "JAS",
+    "fullName": "Jamaica Agricultural Society",
+    "description": "The oldest democratic agrarian organization in the Caribbean, advocating for farming infrastructure and credits.",
+    "established": "1895"
+  },
+  {
+    "id": "jad",
+    "acronym": "JAD",
+    "fullName": "Jamaica Association for the Deaf",
+    "description": "Provides human services, special education classes, audiological screening, and sign language training.",
+    "established": "1938"
+  },
+  {
+    "id": "jspca",
+    "acronym": "JSPCA",
+    "fullName": "Jamaica Society for the Prevention of Cruelty to Animals",
+    "description": "National charity running animal welfare shelters, veterinary clinics, stray rescue, and pet advocacy campaigns.",
+    "established": "1903"
+  },
+  {
+    "id": "bsj",
+    "acronym": "BSJ",
+    "fullName": "Bureau of Standards Jamaica",
+    "description": "Establishes, promotes, and enforces quality guidelines and standards for commercial goods, imports, and services.",
+    "established": "1969"
+  },
+  {
+    "id": "jcf",
+    "acronym": "JCF",
+    "fullName": "Jamaica Constabulary Force",
+    "description": "The primary civil law enforcement agency responsible for public safety, crime detection, and national policing.",
+    "established": "1867"
+  },
+  {
+    "id": "jdf",
+    "acronym": "JDF",
+    "fullName": "Jamaica Defence Force",
+    "description": "The national military forces of Jamaica, coordinates search-and-rescues, maritime border checks, and disaster logistics.",
+    "established": "1962"
+  },
+  {
+    "id": "jamp",
+    "acronym": "JAMP",
+    "fullName": "Jamaica Accountability Meter Portal Limited",
+    "description": "A public tracker monitoring state procurement audits, national contracts, and parliamentary compliance metrics.",
+    "established": "2019"
+  },
+  {
+    "id": "path",
+    "acronym": "PATH",
+    "fullName": "Programme of Advancement Through Health and Education",
+    "description": "National conditional cash transfer (CCT) program delivering financial grants to highly vulnerable families.",
+    "established": "2002"
+  },
+  {
+    "id": "nids",
+    "acronym": "NIDS",
+    "fullName": "National Identification System",
+    "description": "A secure national civil database registration system issuing unique nine-digit NIN identities.",
+    "established": "2021"
   },
   {
     "id": "roofs",
     "acronym": "ROOFS",
-    "fullName": "Restoration of Owner or Occupant Family Shelters",
-    "description": "The ROOFS programme provides financial assistance to rebuild homes that were damaged by hurricane Melissa and assessed through the Ministry of Labour and Social Security.",
+    "fullName": "Restoration of Owner or Occupant Family Shelters Programme",
+    "description": "Graduated post-hurricane housing financial rebuilding grant program managed by the Ministry of Labour.",
     "established": "2026"
+  },
+  {
+    "id": "jaaa",
+    "acronym": "JAAA",
+    "fullName": "Jamaica Athletics Administrative Association",
+    "description": "The governing body for national track and field, coordinating senior and junior national championship trials.",
+    "established": "1932"
+  },
+  {
+    "id": "joa",
+    "acronym": "JOA",
+    "fullName": "Jamaica Olympic Association",
+    "description": "National Olympic Committee responsible for financing and managing Jamaica's representation at global athletic games.",
+    "established": "1936"
+  },
+  {
+    "id": "jff",
+    "acronym": "JFF",
+    "fullName": "Jamaica Football Federation",
+    "description": "Governing body for football, organizing national leagues and managing the Reggae Boyz and Reggae Girlz squads.",
+    "established": "1910"
+  },
+  {
+    "id": "kmtr",
+    "acronym": "KMTR",
+    "fullName": "Kingston Metropolitan Transport Region",
+    "description": "The geographical public transit and municipal routing boundary encompassing urban parishes.",
+    "established": "N/A"
+  },
+  {
+    "id": "cando",
+    "acronym": "CANDO",
+    "fullName": "CaribVET Animal Health Disaster Offshoot",
+    "description": "Ad-hoc regional coordination network protecting plant and animal welfare during ecological disasters."
+  },
+  {
+    "id": "sara",
+    "acronym": "SARA",
+    "fullName": "Semi-Autonomous Revenue Authority",
+    "description": "Legal status granting administrative and human resource autonomy to the Tax Administration Jamaica authority."
   }
 ]
