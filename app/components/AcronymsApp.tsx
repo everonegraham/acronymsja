@@ -40,6 +40,22 @@ function highlightMatch(text: string, query: string): React.ReactNode {
   );
 }
 
+// Cross-fade between the link and check icons instead of swapping them. Both icons
+// stay in the DOM (one absolute-positioned) so the copied/idle change animates on
+// both enter and exit. Values follow the contextual-icon spec: scale 0.25 -> 1,
+// opacity 0 -> 1, blur 4px -> 0, eased with cubic-bezier(0.2, 0, 0, 1).
+function CopyStateIcon({ copied, size }: { copied: boolean; size: string }) {
+  const base = `absolute ${size} transition-[opacity,scale,filter] duration-300 ease-[cubic-bezier(0.2,0,0,1)]`;
+  const shown = "opacity-100 scale-100 blur-0";
+  const hidden = "opacity-0 scale-[0.25] blur-[4px]";
+  return (
+    <span className={`relative inline-flex ${size} items-center justify-center`}>
+      <LinkIcon className={`${base} ${copied ? hidden : shown}`} />
+      <Check className={`${base} text-emerald-600 ${copied ? shown : hidden}`} />
+    </span>
+  );
+}
+
 export default function AcronymsApp() {
   // Static directory data — available at build time so it renders on the server.
   const acronyms = defaultAcronyms;
@@ -263,7 +279,7 @@ export default function AcronymsApp() {
                 <input
                   ref={searchInputRef}
                   type="text"
-                  className="w-full pl-10 pr-10 py-3 text-xs bg-[#fdfdfd] rounded-lg border border-[#e0e0e0] text-[#1a1a1a] placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-[#adc2d2]/30 focus:border-[#2a4d69] focus:outline-none transition-all"
+                  className="w-full pl-10 pr-10 py-3 text-xs bg-[#fdfdfd] rounded-lg border border-[#e0e0e0] text-[#1a1a1a] placeholder:text-slate-400 focus:bg-white focus:ring-2 focus:ring-[#adc2d2]/30 focus:border-[#2a4d69] focus:outline-none transition"
                   placeholder="Query acronyms (e.g. NHT, HEART), full expanded names, or description keywords..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
@@ -294,7 +310,7 @@ export default function AcronymsApp() {
               <div className="flex flex-wrap items-center gap-3 shrink-0">
 
                 {/* Sort Order */}
-                <div className="relative flex items-center text-xs font-semibold text-slate-700 bg-white border border-[#e0e0e0] rounded-lg hover:bg-slate-50 transition-all focus-within:ring-2 focus-within:ring-[#2a4d69]/20 focus-within:border-[#2a4d69]">
+                <div className="relative flex items-center text-xs font-semibold text-slate-700 bg-white border border-[#e0e0e0] rounded-lg hover:bg-slate-50 transition focus-within:ring-2 focus-within:ring-[#2a4d69]/20 focus-within:border-[#2a4d69]">
                   <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
                     <ArrowUpDown className="h-3.5 w-3.5 text-slate-400" />
                   </div>
@@ -315,10 +331,10 @@ export default function AcronymsApp() {
                 </div>
 
                 {/* Grid/List Toggle */}
-                <div className="flex bg-[#f5f5f5] rounded-lg p-1 shrink-0 border border-[#e0e0e0]/50">
+                <div className="flex bg-[#f5f5f5] rounded-[10px] p-1 shrink-0 border border-[#e0e0e0]/50">
                   <button
                     onClick={() => setViewMode("grid")}
-                    className={`p-1.5 rounded-md transition ${
+                    className={`p-1.5 rounded-md transition active:scale-[0.96] ${
                       viewMode === "grid" ? "bg-white text-slate-800 shadow-2xs" : "text-slate-400 hover:text-slate-600"
                     }`}
                     id="grid-layout-btn"
@@ -328,7 +344,7 @@ export default function AcronymsApp() {
                   </button>
                   <button
                     onClick={() => setViewMode("list")}
-                    className={`p-1.5 rounded-md transition ${
+                    className={`p-1.5 rounded-md transition active:scale-[0.96] ${
                       viewMode === "list" ? "bg-white text-slate-800 shadow-2xs" : "text-slate-400 hover:text-slate-600"
                     }`}
                     id="list-layout-btn"
@@ -350,13 +366,13 @@ export default function AcronymsApp() {
           {/* Quick counters & Registry indicators */}
           <div className="flex items-center justify-between border-b border-slate-200 pb-3">
             <p className="text-xs text-slate-500">
-              Showing <strong className="text-slate-700">{filteredAndSortedAcronyms.length}</strong> matching acronyms
+              Showing <strong className="text-slate-700 tabular-nums">{filteredAndSortedAcronyms.length}</strong> matching acronyms
             </p>
 
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm("")}
-                className="text-xs font-bold text-[#2a4d69] hover:text-[#1d354b] transition-all"
+                className="text-xs font-bold text-[#2a4d69] hover:text-[#1d354b] transition active:scale-[0.96]"
                 id="clear-all-filters-btn"
               >
                 Clear search
@@ -367,14 +383,14 @@ export default function AcronymsApp() {
           {filteredAndSortedAcronyms.length === 0 ? (
             <div className="rounded-xl border border-dashed border-[#adc2d2] bg-white p-12 text-center" id="empty-state-view">
               <AlertCircle className="mx-auto h-12 w-12 text-slate-400" />
-              <h3 className="mt-4 text-base font-bold text-slate-800">No Acronyms Found</h3>
-              <p className="mt-2 text-xs text-slate-500 max-w-md mx-auto">
+              <h3 className="mt-4 text-base font-bold text-slate-800 text-balance">No Acronyms Found</h3>
+              <p className="mt-2 text-xs text-slate-500 max-w-md mx-auto text-pretty">
                 We couldn&apos;t find any results matching your search. Try entering a different keyword,
                 or clearing the search to browse the full list.
               </p>
               <button
                 onClick={() => setSearchTerm("")}
-                className="mt-5 rounded-lg bg-[#2a4d69] px-4 py-2 text-xs font-bold text-white hover:bg-[#1d354b] transition-all"
+                className="mt-5 rounded-lg bg-[#2a4d69] px-4 py-2 text-xs font-bold text-white hover:bg-[#1d354b] transition active:scale-[0.96]"
                 id="reset-empty-filters-btn"
               >
                 Show All Acronyms
@@ -415,7 +431,7 @@ export default function AcronymsApp() {
                         else focusCard(idx - 1);
                       }
                     }}
-                    className={`relative flex flex-col justify-between p-5 rounded-xl border transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2a4d69]/40 ${
+                    className={`relative flex flex-col justify-between p-5 rounded-xl border transition cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2a4d69]/40 ${
                       isSelected
                         ? "bg-[#f0f4f8] border-[#adc2d2] ring-2 ring-[#2a4d69]/10 shadow-xs"
                         : "bg-white border-[#e0e0e0] hover:border-[#adc2d2] hover:shadow-xs"
@@ -430,7 +446,7 @@ export default function AcronymsApp() {
                             {highlightMatch(item.acronym, searchTerm)}
                           </span>
                           {item.established && (
-                            <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-500 font-mono flex items-center gap-0.5">
+                            <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-500 font-mono tabular-nums flex items-center gap-0.5">
                               <Clock className="h-2 w-2" />
                               {item.established}
                             </span>
@@ -445,26 +461,22 @@ export default function AcronymsApp() {
                               shareObj.searchParams.set("id", item.id);
                               handleCopyText(item.id, shareObj.toString(), e, "Link copied to clipboard");
                             }}
-                            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-50 hover:text-slate-600 transition"
+                            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-50 hover:text-slate-600 transition active:scale-[0.96]"
                             title="Copy link"
                             id={`copy-btn-${item.id}`}
                           >
-                            {isCopied ? (
-                              <Check className="h-4 w-4 text-emerald-600" />
-                            ) : (
-                              <LinkIcon className="h-4 w-4" />
-                            )}
+                            <CopyStateIcon copied={isCopied} size="h-4 w-4" />
                           </button>
                         </div>
                       </div>
 
                       {/* Agency Subtitle */}
-                      <p className={`mt-2 text-xs font-bold ${isSelected ? "text-[#2a4d69]" : "text-slate-700"}`}>
+                      <p className={`mt-2 text-xs font-bold text-pretty ${isSelected ? "text-[#2a4d69]" : "text-slate-700"}`}>
                         {highlightMatch(item.fullName, searchTerm)}
                       </p>
 
                       {/* Short Description */}
-                      <p className="mt-3 text-xs text-slate-500 line-clamp-3 leading-relaxed font-light">
+                      <p className="mt-3 text-xs text-slate-500 line-clamp-3 leading-relaxed font-light text-pretty">
                         {highlightMatch(item.description, searchTerm)}
                       </p>
                     </div>
@@ -490,32 +502,32 @@ export default function AcronymsApp() {
               <span className="inline-flex rounded-full bg-[#2a4d69]/10 px-3 py-1 text-[10.5px] font-bold text-[#2a4d69] font-mono uppercase tracking-widest">
                 Our Purpose
               </span>
-              <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 font-sans">
+              <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 font-sans text-balance">
                 About Acronyms JA
               </h2>
-              <p className="text-slate-500 font-light leading-relaxed text-sm max-w-xl mx-auto">
+              <p className="text-slate-500 font-light leading-relaxed text-sm max-w-xl mx-auto text-pretty">
                 Acronyms JA is a simple tool to help everyone figure out what Jamaican acronyms stand for. No more guessing.
               </p>
             </div>
 
             {/* Grid Block: Three main columns */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-              <div className="rounded-xl border border-slate-200 bg-white p-6 space-y-3 shadow-2xs hover:border-[#adc2d2]/65 transition-all">
+              <div className="rounded-xl border border-slate-200 bg-white p-6 space-y-3 shadow-2xs hover:border-[#adc2d2]/65 transition">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#2a4d69]/10 text-[#2a4d69]">
                   <BookOpen className="h-5 w-5" />
                 </div>
                 <h3 className="text-sm font-bold text-slate-800">1. Making it Clear</h3>
-                <p className="text-xs text-slate-500 font-light leading-relaxed">
+                <p className="text-xs text-slate-500 font-light leading-relaxed text-pretty">
                   Jamaica is full of acronyms — across government, business, education, and everyday life. We put together this directory so you can easily look up those confusing initials and abbreviations.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-slate-200 bg-white p-6 space-y-3 shadow-2xs hover:border-[#adc2d2]/65 transition-all">
+              <div className="rounded-xl border border-slate-200 bg-white p-6 space-y-3 shadow-2xs hover:border-[#adc2d2]/65 transition">
                 <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#2a4d69]/10 text-[#2a4d69]">
                   <HelpCircle className="h-5 w-5" />
                 </div>
                 <h3 className="text-sm font-bold text-slate-800">2. Helpful Info</h3>
-                <p className="text-xs text-slate-500 font-light leading-relaxed">
+                <p className="text-xs text-slate-500 font-light leading-relaxed text-pretty">
                   For each entry, we provide the full name, the year it was founded, and a brief description of what the organization actually does.
                 </p>
               </div>
@@ -524,7 +536,7 @@ export default function AcronymsApp() {
             {/* Detailed Guide Panel */}
             <div className="rounded-xl border border-[#adc2d2]/30 bg-slate-50/50 p-6 md:p-8 space-y-4">
               <h4 className="text-xs font-mono font-extrabold text-[#2a4d69] uppercase tracking-wider">How to use it</h4>
-              <p className="text-xs text-slate-500 font-light max-w-2xl leading-relaxed">
+              <p className="text-xs text-slate-500 font-light max-w-2xl leading-relaxed text-pretty">
                 Search by the acronym itself (e.g. NHT, HEART), the full expanded name, or any keyword
                 from the description. Tap any result to see its full name, the year it was established,
                 and a short overview of what the organization does.
@@ -535,7 +547,7 @@ export default function AcronymsApp() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 border-t border-slate-200 text-center">
               <button
                 onClick={() => setCurrentTab("listing")}
-                className="w-full sm:w-auto rounded-lg bg-[#2a4d69] hover:bg-[#1e3d59] text-white font-bold text-xs px-6 py-2.5 transition duration-150 text-center cursor-pointer"
+                className="w-full sm:w-auto rounded-lg bg-[#2a4d69] hover:bg-[#1e3d59] text-white font-bold text-xs px-6 py-2.5 transition duration-150 active:scale-[0.96] text-center cursor-pointer"
               >
                 Browse List
               </button>
@@ -543,7 +555,7 @@ export default function AcronymsApp() {
                 href={siteConfig.proposeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto rounded-lg border border-slate-200 hover:border-[#adc2d2]/60 hover:bg-slate-50 text-slate-600 font-bold text-xs px-6 py-2.5 transition duration-150 text-center"
+                className="w-full sm:w-auto rounded-lg border border-slate-200 hover:border-[#adc2d2]/60 hover:bg-slate-50 text-slate-600 font-bold text-xs px-6 py-2.5 transition duration-150 active:scale-[0.96] text-center"
               >
                 Propose
               </a>
@@ -555,7 +567,7 @@ export default function AcronymsApp() {
 
       {/* Footer Disclaimer */}
       <footer className="w-full border-t border-[#e0e0e0] py-5 mt-auto shrink-0 bg-[#fcfdfd]">
-        <p className="text-[11px] text-slate-400 text-center font-light leading-relaxed px-4">
+        <p className="text-[11px] text-slate-400 text-center font-light leading-relaxed px-4 text-pretty">
           Disclaimer: The information listed in this acronym directory represents public reference material gathered for educational purposes.
         </p>
       </footer>
@@ -587,7 +599,7 @@ export default function AcronymsApp() {
                   >
                     {currentSelectedAcronym.acronym}
                   </h2>
-                  <h3 className="mt-2 text-sm font-bold text-slate-700 leading-relaxed font-sans">
+                  <h3 className="mt-2 text-sm font-bold text-slate-700 leading-relaxed font-sans text-balance">
                     {currentSelectedAcronym.fullName}
                   </h3>
                 </div>
@@ -598,18 +610,17 @@ export default function AcronymsApp() {
                       shareObj.searchParams.set("id", currentSelectedAcronym.id);
                       handleCopyText(`share-${currentSelectedAcronym.id}`, shareObj.toString(), e, "Link copied to clipboard");
                     }}
-                    className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition"
+                    className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition active:scale-[0.96]"
                     title="Copy link"
                   >
-                    {copiedStates[`share-${currentSelectedAcronym.id}`] ? (
-                      <Check className="h-5 w-5 text-emerald-600" />
-                    ) : (
-                      <LinkIcon className="h-5 w-5" />
-                    )}
+                    <CopyStateIcon
+                      copied={!!copiedStates[`share-${currentSelectedAcronym.id}`]}
+                      size="h-5 w-5"
+                    />
                   </button>
                   <button
                     onClick={() => closeModal()}
-                    className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition"
+                    className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition active:scale-[0.96]"
                     id="close-modal-x-btn"
                     aria-label="Close"
                   >
@@ -621,7 +632,7 @@ export default function AcronymsApp() {
               <div className="border-y border-slate-100 py-4 font-mono text-xs">
                 <div>
                   <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Established</span>
-                  <span className="mt-1 block font-semibold text-slate-700 flex items-center gap-1">
+                  <span className="mt-1 block font-semibold text-slate-700 tabular-nums flex items-center gap-1">
                     <Calendar className="h-3.5 w-3.5 text-[#2a4d69] shrink-0" />
                     {currentSelectedAcronym.established || "N/A"}
                   </span>
@@ -631,7 +642,7 @@ export default function AcronymsApp() {
               {/* Description */}
               <div>
                 <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono">Overview</h4>
-                <p className="mt-2 text-sm leading-relaxed text-slate-600 font-light whitespace-pre-line">
+                <p className="mt-2 text-sm leading-relaxed text-slate-600 font-light whitespace-pre-line text-pretty">
                   {currentSelectedAcronym.description}
                 </p>
               </div>
@@ -641,7 +652,7 @@ export default function AcronymsApp() {
             <div className="bg-slate-50 border-t border-slate-100 px-6 py-4 flex items-center justify-end shrink-0">
               <button
                 onClick={() => closeModal()}
-                className="rounded-lg bg-[#2a4d69] px-6 py-2 text-xs font-bold text-white hover:bg-[#1d354b] transition-all focus:outline-none"
+                className="rounded-lg bg-[#2a4d69] px-6 py-2 text-xs font-bold text-white hover:bg-[#1d354b] transition active:scale-[0.96] focus:outline-none"
                 id="modal-close-action-btn"
               >
                 Close

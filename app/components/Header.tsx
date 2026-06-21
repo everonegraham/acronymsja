@@ -36,7 +36,7 @@ export default function Header({ currentTab, onTabChange }: HeaderProps) {
           <div className="flex items-center gap-4 sm:gap-5 font-mono text-[10px] sm:text-[10.5px] font-extrabold uppercase tracking-widest">
             <button
               onClick={() => onTabChange("listing")}
-              className={`transition-all py-1 cursor-pointer ${
+              className={`transition active:scale-[0.96] py-1 cursor-pointer ${
                 currentTab === "listing"
                   ? "text-[#2a4d69] border-b-2 border-[#2a4d69]"
                   : "text-slate-400 hover:text-slate-700"
@@ -47,7 +47,7 @@ export default function Header({ currentTab, onTabChange }: HeaderProps) {
             </button>
             <button
               onClick={() => onTabChange("about")}
-              className={`transition-all py-1 cursor-pointer ${
+              className={`transition active:scale-[0.96] py-1 cursor-pointer ${
                 currentTab === "about"
                   ? "text-[#2a4d69] border-b-2 border-[#2a4d69]"
                   : "text-slate-400 hover:text-slate-700"
@@ -65,7 +65,7 @@ export default function Header({ currentTab, onTabChange }: HeaderProps) {
             href={siteConfig.proposeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg bg-[#2a4d69] hover:bg-[#1e3d59] duration-150 transition-all text-white font-bold text-[10.5px] sm:text-[11px] px-3.5 py-1.5 flex items-center gap-1.5 shadow-xs whitespace-nowrap"
+            className="rounded-lg bg-[#2a4d69] hover:bg-[#1e3d59] duration-150 transition active:scale-[0.96] text-white font-bold text-[10.5px] sm:text-[11px] px-3.5 py-1.5 flex items-center gap-1.5 shadow-xs whitespace-nowrap"
             id="propose-acronym-google-form-btn"
           >
             <PlusCircle className="h-3.5 w-3.5" />
