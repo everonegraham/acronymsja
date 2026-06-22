@@ -595,6 +595,20 @@
     "established": "2026"
   },
   {
+    "id": "spark",
+    "acronym": "SPARK",
+    "fullName": "Shared Prosperity through Accelerated Improvement to our Road Network",
+    "description": "National road rehabilitation programme targeting secondary, parochial, and community roads across the island to spur economic growth and improve accessibility.",
+    "established": "2024"
+  },
+  {
+    "id": "reach",
+    "acronym": "REACH",
+    "fullName": "Relief Emergency Assistance and Community Help",
+    "description": "Recovery programme providing relief to communities affected by Hurricane Beryl, restoring utilities, distributing supplies, and funding road rehabilitation across all 63 constituencies.",
+    "established": "2024"
+  },
+  {
     "id": "jaaa",
     "acronym": "JAAA",
     "fullName": "Jamaica Athletics Administrative Association",
