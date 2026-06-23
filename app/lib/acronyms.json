@@ -661,5 +661,19 @@
     "fullName": "Independent Road Examination Entity",
     "description": "Citizen watchdog group of public-minded volunteers who independently verify that roads reported as repaired under the SPARK programme are actually fixed and still in good condition, publishing their findings to promote transparency and accountability in public spending. A satirical concept created by Twitter user @DalveyG.",
     "established": "2026"
+  },
+  {
+    "id": "fid",
+    "acronym": "FID",
+    "fullName": "Financial Investigations Division",
+    "description": "A division within the Ministry of Finance and the Public Service that investigates financial crimes, money laundering, and tax-related matters. Operating under the Proceeds of Crime Act, it leads asset recovery and financial intelligence efforts. It was formed through the merger of the Financial Crimes Unit and the Revenue Protection Division.",
+    "established": "2002"
+  },
+  {
+    "id": "ic",
+    "acronym": "IC",
+    "fullName": "Integrity Commission",
+    "description": "An independent anti-corruption agency established under the Integrity Commission Act to combat corruption through the development, implementation, and enforcement of anti-corruption legislation, policy, and initiatives. It operates through statutory divisions responsible for corruption prevention, investigation, prosecution, and complaints handling.",
+    "established": "2018"
   }
 ]
