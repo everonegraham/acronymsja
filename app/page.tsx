@@ -1,5 +1,5 @@
-import AcronymsApp from "./components/AcronymsApp";
+import Directory from "./components/Directory";
 
 export default function Home() {
-  return <AcronymsApp />;
+  return <Directory />;
 }

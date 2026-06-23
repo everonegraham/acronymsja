@@ -1,14 +1,22 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { PlusCircle, Library } from "lucide-react";
 import { siteConfig } from "../lib/site";
 
-interface HeaderProps {
-  currentTab: "listing" | "about" | "games";
-  onTabChange: (tab: "listing" | "about" | "games") => void;
-}
+const NAV = [
+  { href: "/", label: "Home" },
+  { href: "/games", label: "Games" },
+  { href: "/about", label: "About Us" },
+];
 
-export default function Header({ currentTab, onTabChange }: HeaderProps) {
+export default function Header() {
+  const pathname = usePathname();
+  // Home is active only on exactly "/"; section tabs match their path prefix.
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
   return (
     <div className="w-full flex flex-col" id="app-header-container">
       {/* 1. SIMPLE, PREMIUM TOP NAVBAR */}
@@ -18,7 +26,7 @@ export default function Header({ currentTab, onTabChange }: HeaderProps) {
       >
         <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-full">
           {/* Brand Identity / Left stamp */}
-          <div className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3" id="app-branded-link">
           <div
             className="flex h-8.5 w-8.5 items-center justify-center rounded-lg bg-gradient-to-tr from-[#2a4d69] to-[#1a354c] text-white shadow-xs ring-4 ring-[#2a4d69]/5"
             id="app-branded-logo"
@@ -28,45 +36,26 @@ export default function Header({ currentTab, onTabChange }: HeaderProps) {
           <span className="font-sans text-[12px] font-black uppercase tracking-wider text-[#2a4d69] leading-tight">
             Acronyms JA
           </span>
-        </div>
+        </Link>
 
         {/* Right side item: Home, About Us links and Propose Button clustered next to each other */}
         <div className="flex items-center gap-4 sm:gap-6" id="navigation-cluster">
           {/* Centralized text navigation */}
           <div className="flex items-center gap-4 sm:gap-5 font-mono text-[10px] sm:text-[10.5px] font-extrabold uppercase tracking-widest">
-            <button
-              onClick={() => onTabChange("listing")}
-              className={`transition active:scale-[0.96] py-1 cursor-pointer ${
-                currentTab === "listing"
-                  ? "text-[#2a4d69] border-b-2 border-[#2a4d69]"
-                  : "text-slate-400 hover:text-slate-700"
-              }`}
-              id="nav-tab-home"
-            >
-              Home
-            </button>
-            <button
-              onClick={() => onTabChange("games")}
-              className={`transition active:scale-[0.96] py-1 cursor-pointer ${
-                currentTab === "games"
-                  ? "text-[#2a4d69] border-b-2 border-[#2a4d69]"
-                  : "text-slate-400 hover:text-slate-700"
-              }`}
-              id="nav-tab-games"
-            >
-              Games
-            </button>
-            <button
-              onClick={() => onTabChange("about")}
-              className={`transition active:scale-[0.96] py-1 cursor-pointer ${
-                currentTab === "about"
-                  ? "text-[#2a4d69] border-b-2 border-[#2a4d69]"
-                  : "text-slate-400 hover:text-slate-700"
-              }`}
-              id="nav-tab-about"
-            >
-              About Us
-            </button>
+            {NAV.map((tab) => (
+              <Link
+                key={tab.href}
+                href={tab.href}
+                className={`transition active:scale-[0.96] py-1 cursor-pointer ${
+                  isActive(tab.href)
+                    ? "text-[#2a4d69] border-b-2 border-[#2a4d69]"
+                    : "text-slate-400 hover:text-slate-700"
+                }`}
+                id={`nav-tab-${tab.label.split(" ")[0].toLowerCase()}`}
+              >
+                {tab.label}
+              </Link>
+            ))}
           </div>
 
           <div className="hidden sm:block h-4 w-px bg-slate-200"></div>
