@@ -39,6 +39,20 @@
       transform: translate(-50%, 0);
     }
   }
+
+  @keyframes confetti-fall {
+    0% {
+      transform: translateY(-12vh) rotate(0deg);
+      opacity: 1;
+    }
+    85% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(110vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
 }
 
 @layer base {

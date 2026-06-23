@@ -49,8 +49,8 @@
     "established": "1962"
   },
   {
-    "id": "mjd",
-    "acronym": "MJD",
+    "id": "moj",
+    "acronym": "MOJ",
     "fullName": "Ministry of Justice",
     "description": "Formulates policies and administers services to support the courts, legal aid, restorative justice, victim support, and law reform.",
     "established": "1962"
@@ -393,7 +393,7 @@
   },
   {
     "id": "jn",
-    "acronym": "JN Group",
+    "acronym": "JN",
     "fullName": "Jamaica National",
     "description": "Mutual banking and financial group offering retail bank accounts, general insurance, and international remittances.",
     "established": "1874"
@@ -420,8 +420,8 @@
     "established": "1963"
   },
   {
-    "id": "chase_fund",
-    "acronym": "CHASE Fund",
+    "id": "chase",
+    "acronym": "CHASE",
     "fullName": "Culture, Health, Arts, Sports and Education Fund",
     "description": "Channels statutory levies from lottery and gaming companies to finance social development, arts, and educational grants.",
     "established": "2002"
@@ -434,8 +434,8 @@
     "established": "2015"
   },
   {
-    "id": "jftm",
-    "acronym": "JFTM",
+    "id": "jfmau",
+    "acronym": "JFMAU",
     "fullName": "Jamaica Federation of Musicians and Affiliated Union",
     "description": "Musicians trade union negotiating fair wage agreements, performing standards, and hotel entertainer contracts.",
     "established": "1958"
