@@ -4,8 +4,8 @@ import { PlusCircle, Library } from "lucide-react";
 import { siteConfig } from "../lib/site";
 
 interface HeaderProps {
-  currentTab: "listing" | "about" | "quiz";
-  onTabChange: (tab: "listing" | "about" | "quiz") => void;
+  currentTab: "listing" | "about" | "games";
+  onTabChange: (tab: "listing" | "about" | "games") => void;
 }
 
 export default function Header({ currentTab, onTabChange }: HeaderProps) {
@@ -46,15 +46,15 @@ export default function Header({ currentTab, onTabChange }: HeaderProps) {
               Home
             </button>
             <button
-              onClick={() => onTabChange("quiz")}
+              onClick={() => onTabChange("games")}
               className={`transition active:scale-[0.96] py-1 cursor-pointer ${
-                currentTab === "quiz"
+                currentTab === "games"
                   ? "text-[#2a4d69] border-b-2 border-[#2a4d69]"
                   : "text-slate-400 hover:text-slate-700"
               }`}
-              id="nav-tab-quiz"
+              id="nav-tab-games"
             >
-              Quiz
+              Games
             </button>
             <button
               onClick={() => onTabChange("about")}

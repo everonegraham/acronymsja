@@ -4,7 +4,7 @@ import React, { useState, useEffect, useMemo, useRef, useCallback } from "react"
 import { acronymsData as defaultAcronyms } from "../lib/acronyms";
 import { siteConfig } from "../lib/site";
 import Header from "./Header";
-import Quiz from "./Quiz";
+import Games from "./Games";
 import {
   Search,
   Check,
@@ -74,7 +74,7 @@ export default function AcronymsApp() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // Active view tab state (listing vs about us)
-  const [currentTab, setCurrentTab] = useState<"listing" | "about" | "quiz">("listing");
+  const [currentTab, setCurrentTab] = useState<"listing" | "about" | "games">("listing");
 
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -496,8 +496,8 @@ export default function AcronymsApp() {
           )}
           </div>
           </>
-        ) : currentTab === "quiz" ? (
-          <Quiz />
+        ) : currentTab === "games" ? (
+          <Games />
         ) : (
           <div className="animate-fade-in w-full max-w-3xl mx-auto space-y-12 py-4" id="about-us-container">
             {/* Hero / Philosophy Section */}
