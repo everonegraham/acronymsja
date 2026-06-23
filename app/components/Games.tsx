@@ -27,8 +27,9 @@ const GAMES: GameMeta[] = [
   {
     id: "guess",
     title: "Guess",
-    tagline: "Coming soon",
-    description: "A new way to test how well you know your Jamaican acronyms.",
+    tagline: "Fill in the blanks",
+    description:
+      "We hide a letter or two of an acronym — guess what's missing, with the description and full name as hints.",
     icon: Puzzle,
   },
 ];
