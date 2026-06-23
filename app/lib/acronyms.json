@@ -647,5 +647,19 @@
     "acronym": "SARA",
     "fullName": "Semi-Autonomous Revenue Authority",
     "description": "Legal status granting administrative and human resource autonomy to the Tax Administration Jamaica authority."
+  },
+  {
+    "id": "abp",
+    "acronym": "ABP",
+    "fullName": "Accelerated Bridge Programme",
+    "description": "National infrastructure programme delivering 55 bridges across Jamaica to strengthen connectivity, public safety, and disaster resilience by replacing and upgrading ageing structures under pressure from heavier traffic, severe weather, and river erosion.",
+    "established": "2026"
+  },
+  {
+    "id": "irie",
+    "acronym": "IRIE",
+    "fullName": "Independent Road Examination Entity",
+    "description": "Citizen watchdog group of public-minded volunteers who independently verify that roads reported as repaired under the SPARK programme are actually fixed and still in good condition, publishing their findings to promote transparency and accountability in public spending. A satirical concept created by Twitter user @DalveyG.",
+    "established": "2026"
   }
 ]
