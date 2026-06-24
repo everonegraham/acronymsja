@@ -772,5 +772,13 @@
     "fullName": "Integrity Commission",
     "description": "An independent anti-corruption agency established under the Integrity Commission Act to combat corruption through the development, implementation, and enforcement of anti-corruption legislation, policy, and initiatives. It operates through statutory divisions responsible for corruption prevention, investigation, prosecution, and complaints handling.",
     "established": "2018"
+  },
+  {
+    "id": "jmda",
+    "acronym": "JMDA",
+    "category": "civic",
+    "fullName": "Jamaica Medical Doctors' Association",
+    "description": "A registered trade union and professional body representing government-employed medical doctors across all levels (excluding consultants). Through advocacy, education, and community service, it promotes fair working conditions, professional development, and improved healthcare delivery throughout Jamaica.",
+    "established": "1976"
   }
 ]
