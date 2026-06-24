@@ -1,15 +1,8 @@
-"use client";
-
-import { useState } from "react";
-import { Brain, Puzzle, Target, ArrowLeft, ChevronRight, type LucideIcon } from "lucide-react";
-import Quiz from "./Quiz";
-import Guess from "./Guess";
-import Daily from "./Daily";
-
-type GameId = "quiz" | "guess" | "daily";
+import Link from "next/link";
+import { Brain, Puzzle, Target, ChevronRight, type LucideIcon } from "lucide-react";
 
 interface GameMeta {
-  id: GameId;
+  href: string;
   title: string;
   tagline: string;
   description: string;
@@ -18,7 +11,7 @@ interface GameMeta {
 
 const GAMES: GameMeta[] = [
   {
-    id: "quiz",
+    href: "/games/quiz",
     title: "Quiz",
     tagline: "Multiple choice",
     description:
@@ -26,7 +19,7 @@ const GAMES: GameMeta[] = [
     icon: Brain,
   },
   {
-    id: "guess",
+    href: "/games/guess",
     title: "Guess",
     tagline: "Fill in the blanks",
     description:
@@ -34,38 +27,16 @@ const GAMES: GameMeta[] = [
     icon: Puzzle,
   },
   {
-    id: "daily",
+    href: "/games/daily",
     title: "Daily Puzzle",
     tagline: "Hardcore",
     description:
-      "One entity a day, the same for everyone. Just the clue — no letters, no blanks. Five guesses to name the acronym.",
+      "One entity a day, the same for everyone. Just the clue — no letters, no blanks. Three guesses to name the acronym.",
     icon: Target,
   },
 ];
 
 export default function Games() {
-  const [active, setActive] = useState<GameId | null>(null);
-
-  // ---- A selected game, with a back link to the hub -----------------------
-  if (active) {
-    return (
-      <div className="w-full">
-        <button
-          onClick={() => setActive(null)}
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#2a4d69] transition active:scale-[0.96]"
-          id="games-back-btn"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          All games
-        </button>
-        <div className="mt-4">
-          {active === "quiz" ? <Quiz /> : active === "guess" ? <Guess /> : <Daily />}
-        </div>
-      </div>
-    );
-  }
-
-  // ---- Games hub ----------------------------------------------------------
   return (
     <div className="animate-fade-in w-full max-w-3xl mx-auto py-4 space-y-8">
       <div className="text-center space-y-3">
@@ -84,11 +55,11 @@ export default function Games() {
         {GAMES.map((game) => {
           const Icon = game.icon;
           return (
-            <button
-              key={game.id}
-              onClick={() => setActive(game.id)}
+            <Link
+              key={game.href}
+              href={game.href}
               className="group flex flex-col items-start gap-3 rounded-xl border border-[#e0e0e0] bg-white p-6 text-left transition hover:border-[#adc2d2] hover:shadow-xs active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2a4d69]/40"
-              id={`game-card-${game.id}`}
+              id={`game-card-${game.title.split(" ")[0].toLowerCase()}`}
             >
               <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#2a4d69]/10 text-[#2a4d69]">
                 <Icon className="h-5.5 w-5.5" />
@@ -108,7 +79,7 @@ export default function Games() {
                 Play
                 <ChevronRight className="h-3 w-3" />
               </span>
-            </button>
+            </Link>
           );
         })}
       </div>

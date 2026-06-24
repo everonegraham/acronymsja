@@ -13,7 +13,7 @@ import {
   CornerDownLeft,
 } from "lucide-react";
 
-const MAX_GUESSES = 5;
+const MAX_GUESSES = 3;
 
 // Joke / fabricated entries (category "other") never appear as a daily answer.
 const POOL = acronymsData.filter((a) => a.category !== "other");
@@ -125,7 +125,7 @@ export default function Daily() {
 
   return (
     <div className="animate-fade-in w-full max-w-xl mx-auto py-4 space-y-6">
-      {status === "won" && <Confetti />}
+      {status === "won" && guesses.length === 1 && <Confetti />}
 
       {/* Header */}
       <div className="text-center space-y-3">
@@ -234,8 +234,10 @@ export default function Daily() {
         </div>
       )}
 
-      {/* Guess history — compact chips that wrap, instead of full-width bars. */}
-      {guesses.length > 0 && (
+      {/* Guess history — compact chips that wrap, instead of full-width bars.
+          Hidden on a win: the answer card already shows the solved acronym, so
+          the matching chip would just be a redundant duplicate. */}
+      {guesses.length > 0 && status !== "won" && (
         <div className="flex flex-wrap justify-center gap-2">
           {guesses.map((g, i) => {
             const correct = normalize(g) === normalize(entry.acronym);

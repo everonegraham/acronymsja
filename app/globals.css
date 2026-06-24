@@ -40,18 +40,22 @@
     }
   }
 
-  @keyframes confetti-fall {
-    0% {
-      transform: translateY(-12vh) rotate(0deg);
-      opacity: 1;
-    }
-    85% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateY(110vh) rotate(720deg);
-      opacity: 0;
-    }
+}
+
+/* Defined outside @theme so Tailwind always emits it — it's referenced via an
+   inline `animation` style (Confetti.tsx), not an --animate-* utility, and theme
+   keyframes are pruned unless an --animate-* var uses them. */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-12vh) rotate(0deg);
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
   }
 }
 
