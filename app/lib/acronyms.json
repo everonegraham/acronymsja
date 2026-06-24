@@ -780,5 +780,29 @@
     "fullName": "Jamaica Medical Doctors' Association",
     "description": "A registered trade union and professional body representing government-employed medical doctors across all levels (excluding consultants). Through advocacy, education, and community service, it promotes fair working conditions, professional development, and improved healthcare delivery throughout Jamaica.",
     "established": "1976"
+  },
+  {
+    "id": "pnp",
+    "acronym": "PNP",
+    "category": "civic",
+    "fullName": "People's National Party",
+    "description": "One of Jamaica's two major political parties, founded by Norman Manley. Social-democratic in orientation, it has formed numerous governments since Independence and is traditionally associated with the colour orange and the trade union affiliate, the National Workers' Union.",
+    "established": "1938"
+  },
+  {
+    "id": "jlp",
+    "acronym": "JLP",
+    "category": "civic",
+    "fullName": "Jamaica Labour Party",
+    "description": "One of Jamaica's two major political parties, founded by Alexander Bustamante as the political arm of the Bustamante Industrial Trade Union. Conservative in orientation and associated with the colour green, it has alternated in government with the People's National Party throughout Jamaica's post-Independence history.",
+    "established": "1943"
+  },
+  {
+    "id": "ndm",
+    "acronym": "NDM",
+    "category": "civic",
+    "fullName": "National Democratic Movement",
+    "description": "A minor Jamaican political party founded by Bruce Golding after his departure from the Jamaica Labour Party. Established as a centrist alternative to the two-party system, it advocated constitutional reform and governance change but never won a seat in the House of Representatives.",
+    "established": "1995"
   }
 ]
