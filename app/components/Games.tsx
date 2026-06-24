@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Brain, Puzzle, ArrowLeft, ChevronRight, type LucideIcon } from "lucide-react";
+import { Brain, Puzzle, Target, ArrowLeft, ChevronRight, type LucideIcon } from "lucide-react";
 import Quiz from "./Quiz";
 import Guess from "./Guess";
+import Daily from "./Daily";
 
-type GameId = "quiz" | "guess";
+type GameId = "quiz" | "guess" | "daily";
 
 interface GameMeta {
   id: GameId;
@@ -32,6 +33,14 @@ const GAMES: GameMeta[] = [
       "We hide a letter or two of an acronym — guess what's missing, with the description and full name as hints.",
     icon: Puzzle,
   },
+  {
+    id: "daily",
+    title: "Daily Puzzle",
+    tagline: "Hardcore",
+    description:
+      "One entity a day, the same for everyone. Just the clue — no letters, no blanks. Five guesses to name the acronym.",
+    icon: Target,
+  },
 ];
 
 export default function Games() {
@@ -49,7 +58,9 @@ export default function Games() {
           <ArrowLeft className="h-3.5 w-3.5" />
           All games
         </button>
-        <div className="mt-4">{active === "quiz" ? <Quiz /> : <Guess />}</div>
+        <div className="mt-4">
+          {active === "quiz" ? <Quiz /> : active === "guess" ? <Guess /> : <Daily />}
+        </div>
       </div>
     );
   }

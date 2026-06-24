@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { acronymsData as defaultAcronyms } from "../lib/acronyms";
+import { acronymsData as defaultAcronyms, CATEGORY_META, CATEGORY_ORDER, type Category } from "../lib/acronyms";
 import {
   Search,
   Check,
@@ -58,6 +58,17 @@ export default function Directory() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sortBy, setSortBy] = useState<string>("acronym-asc");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  // Active category filters. Empty = show every category.
+  const [activeCategories, setActiveCategories] = useState<Set<Category>>(new Set());
+
+  const toggleCategory = (cat: Category) => {
+    setActiveCategories((prev) => {
+      const next = new Set(prev);
+      if (next.has(cat)) next.delete(cat);
+      else next.add(cat);
+      return next;
+    });
+  };
 
   // Selected detail state
   const [selectedId, setSelectedId] = useState<string>(defaultAcronyms[0]?.id ?? "");
@@ -184,6 +195,11 @@ export default function Directory() {
     const query = searchTerm.toLowerCase().trim();
     let result = [...acronyms];
 
+    // Filter by category (when one or more chips are active)
+    if (activeCategories.size > 0) {
+      result = result.filter((a) => activeCategories.has(a.category));
+    }
+
     // Filter by text search (acronym, name, or description matches)
     if (query !== "") {
       result = result.filter(
@@ -235,7 +251,15 @@ export default function Directory() {
     });
 
     return result;
-  }, [acronyms, searchTerm, sortBy]);
+  }, [acronyms, searchTerm, sortBy, activeCategories]);
+
+  // Count of entries per category, for the filter chip labels.
+  const categoryCounts = useMemo(() => {
+    const counts = {} as Record<Category, number>;
+    for (const cat of CATEGORY_ORDER) counts[cat] = 0;
+    for (const a of acronyms) counts[a.category]++;
+    return counts;
+  }, [acronyms]);
 
   const handleSelectCard = (id: string) => {
     setSelectedId(id);
@@ -340,6 +364,41 @@ export default function Directory() {
             </div>
           </div>
 
+          {/* Category filter chips */}
+          <div className="flex flex-wrap items-center gap-2 border-t border-slate-100 pt-3.5" id="category-filter-row">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono mr-0.5">Filter</span>
+            <button
+              onClick={() => setActiveCategories(new Set())}
+              className={`rounded-full px-2.5 py-1 text-[11px] font-bold transition active:scale-[0.97] ring-1 ${
+                activeCategories.size === 0
+                  ? "bg-[#2a4d69] text-white ring-[#2a4d69]"
+                  : "bg-white text-slate-500 ring-slate-200 hover:ring-[#adc2d2]"
+              }`}
+              id="category-chip-all"
+            >
+              All
+            </button>
+            {CATEGORY_ORDER.map((cat) => {
+              const active = activeCategories.has(cat);
+              return (
+                <button
+                  key={cat}
+                  onClick={() => toggleCategory(cat)}
+                  className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-bold transition active:scale-[0.97] ring-1 ${
+                    active
+                      ? CATEGORY_META[cat].badge
+                      : "bg-white text-slate-500 ring-slate-200 hover:ring-[#adc2d2]"
+                  }`}
+                  id={`category-chip-${cat}`}
+                  aria-pressed={active}
+                >
+                  {CATEGORY_META[cat].label}
+                  <span className="text-[10px] font-mono tabular-nums opacity-60">{categoryCounts[cat]}</span>
+                </button>
+              );
+            })}
+          </div>
+
         </div>
       </div>
 
@@ -352,13 +411,16 @@ export default function Directory() {
             Showing <strong className="text-slate-700 tabular-nums">{filteredAndSortedAcronyms.length}</strong> matching acronyms
           </p>
 
-          {searchTerm && (
+          {(searchTerm || activeCategories.size > 0) && (
             <button
-              onClick={() => setSearchTerm("")}
+              onClick={() => {
+                setSearchTerm("");
+                setActiveCategories(new Set());
+              }}
               className="text-xs font-bold text-[#2a4d69] hover:text-[#1d354b] transition active:scale-[0.96]"
               id="clear-all-filters-btn"
             >
-              Clear search
+              Clear filters
             </button>
           )}
         </div>
@@ -372,7 +434,10 @@ export default function Directory() {
               or clearing the search to browse the full list.
             </p>
             <button
-              onClick={() => setSearchTerm("")}
+              onClick={() => {
+                setSearchTerm("");
+                setActiveCategories(new Set());
+              }}
               className="mt-5 rounded-lg bg-[#2a4d69] px-4 py-2 text-xs font-bold text-white hover:bg-[#1d354b] transition active:scale-[0.96]"
               id="reset-empty-filters-btn"
             >
@@ -424,9 +489,12 @@ export default function Directory() {
                   <div className="w-full">
                     {/* Header: Acronym and Copy buttons */}
                     <div className="flex items-start justify-between gap-4">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <span className="text-2xl font-black font-display tracking-tight text-slate-900">
                           {highlightMatch(item.acronym, searchTerm)}
+                        </span>
+                        <span className={`rounded-full px-1.5 py-0.5 text-[9px] font-bold ring-1 ${CATEGORY_META[item.category].badge}`}>
+                          {CATEGORY_META[item.category].label}
                         </span>
                         {item.established && (
                           <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[9px] font-semibold text-slate-500 font-mono tabular-nums flex items-center gap-0.5">
@@ -535,12 +603,18 @@ export default function Directory() {
                 </div>
               </div>
 
-              <div className="border-y border-slate-100 py-4 font-mono text-xs">
+              <div className="border-y border-slate-100 py-4 font-mono text-xs flex items-start gap-8">
                 <div>
                   <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Established</span>
                   <span className="mt-1 block font-semibold text-slate-700 tabular-nums flex items-center gap-1">
                     <Calendar className="h-3.5 w-3.5 text-[#2a4d69] shrink-0" />
                     {currentSelectedAcronym.established || "N/A"}
+                  </span>
+                </div>
+                <div>
+                  <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Sector</span>
+                  <span className={`mt-1 inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-bold ring-1 ${CATEGORY_META[currentSelectedAcronym.category].badge}`}>
+                    {CATEGORY_META[currentSelectedAcronym.category].label}
                   </span>
                 </div>
               </div>

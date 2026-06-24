@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { acronymsData, type Acronym } from "./acronyms";
+import { acronymsData, CATEGORY_META, type Acronym } from "./acronyms";
 
 describe("acronymsData integrity", () => {
   it("has at least one entry", () => {
@@ -10,6 +10,7 @@ describe("acronymsData integrity", () => {
     const required: (keyof Acronym)[] = [
       "id",
       "acronym",
+      "category",
       "fullName",
       "description",
     ];
@@ -18,6 +19,12 @@ describe("acronymsData integrity", () => {
         expect(typeof entry[field], `${entry.id}.${field}`).toBe("string");
         expect((entry[field] as string).length, `${entry.id}.${field}`).toBeGreaterThan(0);
       }
+    }
+  });
+
+  it("every entry has a known category", () => {
+    for (const entry of acronymsData) {
+      expect(CATEGORY_META[entry.category], `${entry.id}.category=${entry.category}`).toBeDefined();
     }
   });
 
