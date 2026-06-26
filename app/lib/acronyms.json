@@ -804,5 +804,13 @@
     "fullName": "National Democratic Movement",
     "description": "A minor Jamaican political party founded by Bruce Golding after his departure from the Jamaica Labour Party. Established as a centrist alternative to the two-party system, it advocated constitutional reform and governance change but never won a seat in the House of Representatives.",
     "established": "1995"
+  },
+  {
+    "id": "jacra",
+    "acronym": "JACRA",
+    "category": "government",
+    "fullName": "Jamaica Agricultural Commodities Regulatory Authority",
+    "description": "A statutory body under the Ministry of Agriculture, Fisheries and Mining responsible for the development, regulation, and standardization of Jamaica's coffee, cocoa, coconut, and spices industries. It sets quality standards and provides quality assurance and certification services governing trade in these commodities.",
+    "established": "2017"
   }
 ]
