@@ -812,5 +812,13 @@
     "fullName": "Jamaica Agricultural Commodities Regulatory Authority",
     "description": "A statutory body under the Ministry of Agriculture, Fisheries and Mining responsible for the development, regulation, and standardization of Jamaica's coffee, cocoa, coconut, and spices industries. It sets quality standards and provides quality assurance and certification services governing trade in these commodities.",
     "established": "2017"
+  },
+  {
+    "id": "todss",
+    "acronym": "TODSS",
+    "category": "civic",
+    "fullName": "Transport Operators Development Sustainable Services",
+    "description": "A membership organization representing roughly 11,000 bus and taxi operators across Jamaica's public passenger transport sector. Led by president Egerton Newman, it advocates for operators' interests on matters such as fares and ticket amnesties while promoting culture change and road safety through initiatives like its 'Spot The Good Driva' award campaign to reduce fatal crashes.",
+    "established": "2018"
   }
 ]
