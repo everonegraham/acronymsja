@@ -820,5 +820,13 @@
     "fullName": "Transport Operators Development Sustainable Services",
     "description": "A membership organization representing roughly 11,000 bus and taxi operators across Jamaica's public passenger transport sector. Led by president Egerton Newman, it advocates for operators' interests on matters such as fares and ticket amnesties while promoting culture change and road safety through initiatives like its 'Spot The Good Driva' award campaign to reduce fatal crashes.",
     "established": "2018"
+  },
+  {
+    "id": "ogt",
+    "acronym": "OGT",
+    "category": "government",
+    "fullName": "Office of the Government Trustee",
+    "description": "A government agency under the Ministry of Industry, Investment and Commerce that provides insolvency administration services in Jamaica. Established under the Insolvency Act, it assesses debtors' financial situations, prepares insolvency proposals and bankruptcy administrations, verifies creditor claims, manages and disposes of assets, and processes dividend payments. Successor to the Office of the Trustee in Bankruptcy, it emphasizes rehabilitating debtors and preserving viable businesses while protecting creditor rights.",
+    "established": "2014"
   }
 ]
