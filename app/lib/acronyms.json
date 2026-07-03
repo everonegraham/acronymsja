@@ -836,5 +836,13 @@
     "fullName": "Island Traffic Authority",
     "description": "A statutory body established under Section 3 of the Road Traffic Act, operating under the Ministry of Transport and Mining, responsible for administering the provisions of Jamaica's Road Traffic Act to keep the nation's roadways safe. It oversees vehicle testing to ensure fitness and road-worthiness, conducts vehicle inspections, administers driver's licence testing, issues fitness certificates, and enforces general compliance with road safety standards.",
     "established": "1938"
+  },
+  {
+    "id": "moca",
+    "acronym": "MOCA",
+    "category": "government",
+    "fullName": "Major Organised Crime & Anti-Corruption Agency",
+    "description": "An independent, elite law enforcement agency dedicated to fighting corruption and bringing high-value criminals to justice. Through intelligence-led investigations and strategic partnerships, it targets serious organised crime, economic crime, cyber crime, corruption, and advanced fee fraud. Formed by merging the Anti-Corruption Branch and the Major Organised Crime & Anti-Corruption Taskforce, it became fully independent on 1 April 2021.",
+    "established": "2014"
   }
 ]
