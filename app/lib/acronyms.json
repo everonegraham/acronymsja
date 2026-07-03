@@ -828,5 +828,13 @@
     "fullName": "Office of the Government Trustee",
     "description": "A government agency under the Ministry of Industry, Investment and Commerce that provides insolvency administration services in Jamaica. Established under the Insolvency Act, it assesses debtors' financial situations, prepares insolvency proposals and bankruptcy administrations, verifies creditor claims, manages and disposes of assets, and processes dividend payments. Successor to the Office of the Trustee in Bankruptcy, it emphasizes rehabilitating debtors and preserving viable businesses while protecting creditor rights.",
     "established": "2014"
+  },
+  {
+    "id": "ita",
+    "acronym": "ITA",
+    "category": "government",
+    "fullName": "Island Traffic Authority",
+    "description": "A statutory body established under Section 3 of the Road Traffic Act, operating under the Ministry of Transport and Mining, responsible for administering the provisions of Jamaica's Road Traffic Act to keep the nation's roadways safe. It oversees vehicle testing to ensure fitness and road-worthiness, conducts vehicle inspections, administers driver's licence testing, issues fitness certificates, and enforces general compliance with road safety standards.",
+    "established": "1938"
   }
 ]
