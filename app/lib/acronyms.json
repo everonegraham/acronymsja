@@ -844,5 +844,21 @@
     "fullName": "Major Organised Crime & Anti-Corruption Agency",
     "description": "An independent, elite law enforcement agency dedicated to fighting corruption and bringing high-value criminals to justice. Through intelligence-led investigations and strategic partnerships, it targets serious organised crime, economic crime, cyber crime, corruption, and advanced fee fraud. Formed by merging the Anti-Corruption Branch and the Major Organised Crime & Anti-Corruption Taskforce, it became fully independent on 1 April 2021.",
     "established": "2014"
+  },
+  {
+    "id": "paac",
+    "acronym": "PAAC",
+    "category": "government",
+    "fullName": "Public Administration and Appropriations Committee",
+    "description": "A sessional select committee of the Houses of Parliament that provides oversight of the public purse. It examines the budgetary expenditure of government agencies to ensure spending accords with parliamentary approval, monitors expenditure as it occurs, keeps Parliament informed of how the budget is being implemented, and enquires into the administration of Government to identify hindrances to efficiency. None of its members may be a minister or parliamentary secretary.",
+    "established": "1996"
+  },
+  {
+    "id": "jamvat",
+    "acronym": "JAMVAT",
+    "category": "government",
+    "fullName": "Jamaica Values and Attitudes Programme for Tertiary Students",
+    "description": "A Ministry of Education student-financing programme that helps needy tertiary students who qualify for admission but cannot fully afford tuition. In exchange for 200 hours of public or community service, participants receive up to 30% of their tuition (capped at J$350,000), gaining job experience and part-funding for their studies while contributing to nation building.",
+    "established": "2001"
   }
 ]
