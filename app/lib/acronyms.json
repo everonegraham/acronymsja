@@ -860,5 +860,29 @@
     "fullName": "Jamaica Values and Attitudes Programme for Tertiary Students",
     "description": "A Ministry of Education student-financing programme that helps needy tertiary students who qualify for admission but cannot fully afford tuition. In exchange for 200 hours of public or community service, participants receive up to 30% of their tuition (capped at J$350,000), gaining job experience and part-funding for their studies while contributing to nation building.",
     "established": "2001"
+  },
+  {
+    "id": "gojep",
+    "acronym": "GOJEP",
+    "category": "government",
+    "fullName": "Government of Jamaica Electronic Procurement System",
+    "description": "The Government of Jamaica's online public procurement platform, administered by the Office of Public Procurement Policy in the Ministry of Finance and the Public Service. Ministries, departments and agencies use it to publish tender notices, distribute bidding documents, receive electronic bids and award contracts, while suppliers register on the portal to find and respond to government tenders. It was introduced to make public procurement more transparent, competitive and efficient, and its use is mandatory for procuring entities under the Public Procurement Act.",
+    "established": "2014"
+  },
+  {
+    "id": "aaj",
+    "acronym": "AAJ",
+    "category": "public",
+    "fullName": "Airports Authority of Jamaica",
+    "description": "A statutory body under the Airports Authority Act responsible for the development, management and operation of Jamaica's public airports and aerodromes, falling under the Ministry of Transport. Its portfolio includes the Norman Manley International Airport in Kingston, the Sangster International Airport in Montego Bay, the Ian Fleming International Airport in St. Mary, and the Tinson Pen, Ken Jones and Negril aerodromes. The two main international airports are run by private concessionaires, with the AAJ overseeing the concession agreements on the Government's behalf.",
+    "established": "1974"
+  },
+  {
+    "id": "uhwi",
+    "acronym": "UHWI",
+    "category": "public",
+    "fullName": "University Hospital of the West Indies",
+    "description": "A regional tertiary-care teaching hospital located on the Mona campus of The University of the West Indies in St. Andrew. It is the principal teaching hospital for the UWI Faculty of Medical Sciences and one of the largest hospitals in the English-speaking Caribbean, providing specialist and referral services that are not widely available elsewhere in the region. It was opened as the University College Hospital of the West Indies and is funded mainly by the Government of Jamaica with contributions from other participating Caribbean territories.",
+    "established": "1953"
   }
 ]
